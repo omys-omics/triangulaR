@@ -1,6 +1,11 @@
 #' alleleFreqDiff
 #'
-#' @param text (character) vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL
+#' @param vcfR (object) Data in vcfR format
+#' @param pm (dataframe) Dataframe containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population
+#' @param p1 (character) name of parental population 1
+#' @param p2 (character) name of parental population 2
+#' @param difference (numeric) allele frequency difference threshold, must be between 0 and 1
+#'
 #'
 #' @return vcfR object
 #' @export
@@ -91,7 +96,11 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
 
 #' hybridIndex
 #'
-#' @param text (character) vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL
+#' @param vcfR (object) Data in vcfR format
+#' @param pm (dataframe) Dataframe containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population
+#' @param p1 (character) name of parental population 1
+#' @param p2 (character) name of parental population 2
+#' @param difference (numeric) allele frequency difference threshold, must be between 0 and 1
 #'
 #' @return dataframe containing hybrid indices, heterozygosities, and percent missing data
 #' @export
@@ -216,7 +225,12 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
 
 #' triangle.plot
 #'
-#' @param text (character) data = NULL, colors = NULL, outline = T, cex = 2, alpha = 1, jitter = 0
+#' @param data (dataframe) Dataframe returned from hybridIndex function
+#' @param colors (character) Colors to use for each population. Optional, if not supplied, default colors will be generated
+#' @param outline (logical) Whether or not to draw possible triangle space as outline
+#' @param cex (character) Size of points
+#' @param alpha (numeric) Transparency of points
+#' @param jitter (numeric) Amount by which to jitter points on plot (to facilitate visualization)
 #'
 #' @return ggplot2 object
 #' @export
@@ -262,7 +276,11 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
 
 #' missing.plot
 #'
-#' @param text (character) data = NULL, outline = T, cex = 2, alpha = 1, jitter = 0
+#' @param data (dataframe) Dataframe returned from hybridIndex function
+#' @param outline (logical) Whether or not to draw possible triangle space as outline
+#' @param cex (character) Size of points
+#' @param alpha (numeric) Transparency of points
+#' @param jitter (numeric) Amount by which to jitter points on plot (to facilitate visualization)
 #'
 #' @return ggplot2 object
 #' @export
