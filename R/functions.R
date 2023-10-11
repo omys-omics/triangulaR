@@ -13,7 +13,7 @@
 #'
 #'
 #' @examples
-#' #alleleFreqDiff(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2, difference = 0.5)
+#' #alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = p1, p2 = p2, difference = 0.5)
 alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL) {
   if (any(is.na(pm$pop))) {
     stop("All individuals must be assigned to a population (no NAs in popmap)")
@@ -109,7 +109,7 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
 #' @importFrom vcfR extract.gt is.het
 #'
 #' @examples
-#' #hybridIndex(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2)
+#' #hybridIndex(vcfR = example.vcfR, pm = example.popmap, p1 = p1, p2 = p2)
 hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
   if (any(is.na(pm$pop))) {
     stop("All individuals must be assigned to a population (no NAs in popmap)")
