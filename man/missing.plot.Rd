@@ -7,7 +7,7 @@
 missing.plot(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 0)
 }
 \arguments{
-\item{data}{(dataframe) Dataframe returned from hybridIndex function}
+\item{data}{Dataframe returned from hybridIndex function}
 
 \item{outline}{(logical) Whether or not to draw possible triangle space as outline}
 
@@ -24,5 +24,5 @@ ggplot2 object
 missing.plot
 }
 \examples{
-missing.plot(data = your.data)
+#missing.plot(data = your.data)
 }

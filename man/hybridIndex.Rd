@@ -7,15 +7,13 @@
 hybridIndex(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL)
 }
 \arguments{
-\item{vcfR}{(object) Data in vcfR format}
+\item{vcfR}{data in vcfR format}
 
-\item{pm}{(dataframe) Dataframe containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population}
+\item{pm}{data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population}
 
 \item{p1}{(character) name of parental population 1}
 
 \item{p2}{(character) name of parental population 2}
-
-\item{difference}{(numeric) allele frequency difference threshold, must be between 0 and 1}
 }
 \value{
 dataframe containing hybrid indices, heterozygosities, and percent missing data
@@ -24,5 +22,5 @@ dataframe containing hybrid indices, heterozygosities, and percent missing data
 hybridIndex
 }
 \examples{
-hybridIndex(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2, difference = 0.5)
+#hybridIndex(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2)
 }

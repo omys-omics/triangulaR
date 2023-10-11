@@ -14,7 +14,7 @@ triangle.plot(
 )
 }
 \arguments{
-\item{data}{(dataframe) Dataframe returned from hybridIndex function}
+\item{data}{Dataframe returned from hybridIndex function}
 
 \item{colors}{(character) Colors to use for each population. Optional, if not supplied, default colors will be generated}
 
@@ -33,5 +33,5 @@ ggplot2 object
 triangle.plot
 }
 \examples{
-triangle.plot(data = your.data, colors = your.colors)
+#triangle.plot(data = your.data, colors = your.colors)
 }

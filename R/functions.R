@@ -1,7 +1,7 @@
 #' alleleFreqDiff
 #'
-#' @param vcfR (object) Data in vcfR format
-#' @param pm (dataframe) Dataframe containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population
+#' @param vcfR vcfR object
+#' @param pm data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population
 #' @param p1 (character) name of parental population 1
 #' @param p2 (character) name of parental population 2
 #' @param difference (numeric) allele frequency difference threshold, must be between 0 and 1
@@ -9,9 +9,11 @@
 #'
 #' @return vcfR object
 #' @export
+#' @importFrom vcfR extract.gt is.het
+#'
 #'
 #' @examples
-#' alleleFreqDiff(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2, difference = 0.5)
+#' #alleleFreqDiff(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2, difference = 0.5)
 alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL) {
   if (any(is.na(pm$pop))) {
     stop("All individuals must be assigned to a population (no NAs in popmap)")
@@ -96,17 +98,18 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
 
 #' hybridIndex
 #'
-#' @param vcfR (object) Data in vcfR format
-#' @param pm (dataframe) Dataframe containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population
+#' @param vcfR data in vcfR format
+#' @param pm data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population
 #' @param p1 (character) name of parental population 1
 #' @param p2 (character) name of parental population 2
-#' @param difference (numeric) allele frequency difference threshold, must be between 0 and 1
 #'
 #' @return dataframe containing hybrid indices, heterozygosities, and percent missing data
 #' @export
 #'
+#' @importFrom vcfR extract.gt is.het
+#'
 #' @examples
-#' hybridIndex(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2, difference = 0.5)
+#' #hybridIndex(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2)
 hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
   if (any(is.na(pm$pop))) {
     stop("All individuals must be assigned to a population (no NAs in popmap)")
@@ -225,7 +228,7 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
 
 #' triangle.plot
 #'
-#' @param data (dataframe) Dataframe returned from hybridIndex function
+#' @param data Dataframe returned from hybridIndex function
 #' @param colors (character) Colors to use for each population. Optional, if not supplied, default colors will be generated
 #' @param outline (logical) Whether or not to draw possible triangle space as outline
 #' @param cex (character) Size of points
@@ -235,8 +238,11 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
 #' @return ggplot2 object
 #' @export
 #'
+#' @import ggplot2
+#' @importFrom grDevices colorRampPalette
+#'
 #' @examples
-#' triangle.plot(data = your.data, colors = your.colors)
+#' #triangle.plot(data = your.data, colors = your.colors)
 triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alpha = 1, jitter = 0) {
   if(is.null(colors)) {
     color_ramp <- colorRampPalette(c("orange", "blue", "green", "red1", "yellow", "purple"))
@@ -276,7 +282,7 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
 
 #' missing.plot
 #'
-#' @param data (dataframe) Dataframe returned from hybridIndex function
+#' @param data Dataframe returned from hybridIndex function
 #' @param outline (logical) Whether or not to draw possible triangle space as outline
 #' @param cex (character) Size of points
 #' @param alpha (numeric) Transparency of points
@@ -285,8 +291,10 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
 #' @return ggplot2 object
 #' @export
 #'
+#' @import ggplot2
+#'
 #' @examples
-#' missing.plot(data = your.data)
+#' #missing.plot(data = your.data)
 missing.plot <- function(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 0) {
   if(outline) {
     p <- ggplot(data, aes(x=hybrid.index, y=heterozygosity, color=perc.missing)) +
