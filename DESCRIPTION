@@ -16,3 +16,5 @@ Imports:
     grDevices
 Depends:
     ggplot2
+URL: https://github.com/omys-omics/triangulaR
+BugReports: https://github.com/omys-omics/triangulaR/issues
