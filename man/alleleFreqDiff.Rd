@@ -2,14 +2,14 @@
 % Please edit documentation in R/functions.R
 \name{alleleFreqDiff}
 \alias{alleleFreqDiff}
-\title{alleleFreqDiff}
+\title{Generate a new vcfR object with only sites with an allele frequency difference above the given threshold}
 \usage{
 alleleFreqDiff(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL)
 }
 \arguments{
 \item{vcfR}{vcfR object}
 
-\item{pm}{data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population}
+\item{pm}{data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each sample must be assigned to a population}
 
 \item{p1}{(character) name of parental population 1}
 
@@ -21,8 +21,8 @@ alleleFreqDiff(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL)
 vcfR object
 }
 \description{
-alleleFreqDiff
+Generate a new vcfR object with only sites with an allele frequency difference above the given threshold
 }
 \examples{
-#alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = p1, p2 = p2, difference = 0.5)
+#alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20, difference = 0.5)
 }

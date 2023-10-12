@@ -1,7 +1,7 @@
-#' alleleFreqDiff
+#' Generate a new vcfR object with only sites with an allele frequency difference above the given threshold
 #'
 #' @param vcfR vcfR object
-#' @param pm data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population
+#' @param pm data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each sample must be assigned to a population
 #' @param p1 (character) name of parental population 1
 #' @param p2 (character) name of parental population 2
 #' @param difference (numeric) allele frequency difference threshold, must be between 0 and 1
@@ -13,7 +13,7 @@
 #'
 #'
 #' @examples
-#' #alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = p1, p2 = p2, difference = 0.5)
+#' #alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20, difference = 0.5)
 alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL) {
   if (any(is.na(pm$pop))) {
     stop("All individuals must be assigned to a population (no NAs in popmap)")
@@ -96,10 +96,10 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
 
 
 
-#' hybridIndex
+#' Calculate hybrid index, heterozygosity, and percent missing data for each sample
 #'
 #' @param vcfR data in vcfR format
-#' @param pm data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population
+#' @param pm data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each sample must be assigned to a population
 #' @param p1 (character) name of parental population 1
 #' @param p2 (character) name of parental population 2
 #'
@@ -109,7 +109,7 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
 #' @importFrom vcfR extract.gt is.het
 #'
 #' @examples
-#' #hybridIndex(vcfR = example.vcfR, pm = example.popmap, p1 = p1, p2 = p2)
+#' #hybridIndex(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20)
 hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
   if (any(is.na(pm$pop))) {
     stop("All individuals must be assigned to a population (no NAs in popmap)")
@@ -226,7 +226,7 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
 }
 
 
-#' triangle.plot
+#' Generate a triangle plot using the output of hybridIndex
 #'
 #' @param data Dataframe returned from hybridIndex function
 #' @param colors (character) Colors to use for each population. Optional, if not supplied, default colors will be generated
@@ -280,7 +280,7 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
 }
 
 
-#' missing.plot
+#' Color the triangle plot by perecent missing data in each sample
 #'
 #' @param data Dataframe returned from hybridIndex function
 #' @param outline (logical) Whether or not to draw possible triangle space as outline

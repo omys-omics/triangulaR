@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{triangle.plot}
 \alias{triangle.plot}
-\title{triangle.plot}
+\title{Generate a triangle plot using the output of hybridIndex}
 \usage{
 triangle.plot(
   data = NULL,
@@ -30,7 +30,7 @@ triangle.plot(
 ggplot2 object
 }
 \description{
-triangle.plot
+Generate a triangle plot using the output of hybridIndex
 }
 \examples{
 #triangle.plot(data = your.data, colors = your.colors)

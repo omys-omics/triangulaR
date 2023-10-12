@@ -2,14 +2,14 @@
 % Please edit documentation in R/functions.R
 \name{hybridIndex}
 \alias{hybridIndex}
-\title{hybridIndex}
+\title{Calculate hybrid index, heterozygosity, and percent missing data for each sample}
 \usage{
 hybridIndex(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL)
 }
 \arguments{
 \item{vcfR}{data in vcfR format}
 
-\item{pm}{data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each individual must be assigned to a population}
+\item{pm}{data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each sample must be assigned to a population}
 
 \item{p1}{(character) name of parental population 1}
 
@@ -19,8 +19,8 @@ hybridIndex(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL)
 dataframe containing hybrid indices, heterozygosities, and percent missing data
 }
 \description{
-hybridIndex
+Calculate hybrid index, heterozygosity, and percent missing data for each sample
 }
 \examples{
-#hybridIndex(vcfR = example.vcfR, pm = example.popmap, p1 = p1, p2 = p2)
+#hybridIndex(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{missing.plot}
 \alias{missing.plot}
-\title{missing.plot}
+\title{Color the triangle plot by perecent missing data in each sample}
 \usage{
 missing.plot(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 0)
 }
@@ -21,7 +21,7 @@ missing.plot(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 0)
 ggplot2 object
 }
 \description{
-missing.plot
+Color the triangle plot by perecent missing data in each sample
 }
 \examples{
 #missing.plot(data = your.data)
