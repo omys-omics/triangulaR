@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{hybridIndex}
 \alias{hybridIndex}
-\title{Calculate hybrid index, heterozygosity, and percent missing data for each sample}
+\title{hybridIndex}
 \usage{
 hybridIndex(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL)
 }

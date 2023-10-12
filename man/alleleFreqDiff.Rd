@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{alleleFreqDiff}
 \alias{alleleFreqDiff}
-\title{Generate a new vcfR object with only sites with an allele frequency difference above the given threshold}
+\title{alleleFreqDiff}
 \usage{
 alleleFreqDiff(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL)
 }

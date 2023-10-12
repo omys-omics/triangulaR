@@ -1,3 +1,5 @@
+#' alleleFreqDiff
+#'
 #' Generate a new vcfR object with only sites with an allele frequency difference above the given threshold
 #'
 #' @param vcfR vcfR object
@@ -96,6 +98,8 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
 
 
 
+#' hybridIndex
+#'
 #' Calculate hybrid index, heterozygosity, and percent missing data for each sample
 #'
 #' @param vcfR data in vcfR format
@@ -226,6 +230,8 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
 }
 
 
+#' triangle.plot
+#'
 #' Generate a triangle plot using the output of hybridIndex
 #'
 #' @param data Dataframe returned from hybridIndex function
@@ -280,6 +286,8 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
 }
 
 
+#' missing.plot
+#'
 #' Color the triangle plot by perecent missing data in each sample
 #'
 #' @param data Dataframe returned from hybridIndex function
