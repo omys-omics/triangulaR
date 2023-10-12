@@ -24,5 +24,5 @@ vcfR object
 alleleFreqDiff
 }
 \examples{
-#alleleFreqDiff(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2, difference = 0.5)
+#alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = p1, p2 = p2, difference = 0.5)
 }

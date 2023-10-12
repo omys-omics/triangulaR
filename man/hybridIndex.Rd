@@ -22,5 +22,5 @@ dataframe containing hybrid indices, heterozygosities, and percent missing data
 hybridIndex
 }
 \examples{
-#hybridIndex(vcfR = vcfR, pm = pm, p1 = p1, p2 = p2)
+#hybridIndex(vcfR = example.vcfR, pm = example.popmap, p1 = p1, p2 = p2)
 }
