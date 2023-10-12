@@ -8,7 +8,7 @@
 <!-- badges: end -->
 
 triangulaR is a package for calculating hybrid indices, heterozygosity,
-and building triangle plots from genomic data
+and building triangle plots
 
 ## Installation
 
@@ -60,13 +60,14 @@ data
 #> Object size: 6.2 Mb
 #> 0 percent missing data
 #> *****        *****         *****
+
 # Or, use example vcfR object
 example.vcfR
 #> ***** Object of Class vcfR *****
 #> 420 samples
 #> 1 CHROMs
-#> 1,605 variants
-#> Object size: 5.5 Mb
+#> 1,215 variants
+#> Object size: 4.2 Mb
 #> 0 percent missing data
 #> *****        *****         *****
 ```
@@ -116,7 +117,7 @@ frequency difference threshold to see how this value affects results.
 ``` r
 # Create a new vcfR object composed only of sites above the given allele frequency difference threshold
 example.vcfR.diff <- alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20, difference = 0.6)
-#> [1] "148 sites passed allele frequency difference threshold"
+#> [1] "216 sites passed allele frequency difference threshold"
 ```
 
 #### Step 4: Calculate hybrid index and heterozygosity for each sample
@@ -128,7 +129,7 @@ calculated.
 ``` r
 # Calculate hybrid index and heterozygosity for each sample. Values are returned in a data.frame
 hi.het <- hybridIndex(vcfR = example.vcfR.diff, pm = example.popmap, p1 = 0, p2 = 20)
-#> [1] "calculating hybrid indices and heterozygosities based on 148 sites"
+#> [1] "calculating hybrid indices and heterozygosities based on 216 sites"
 ```
 
 #### Step 5: Visualize results as a triangle plot
@@ -154,14 +155,3 @@ missing.plot(hi.het)
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.

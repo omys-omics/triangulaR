@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-triangulaR is a package for calculating hybrid indices, heterozygosity, and building triangle plots from genomic data
+triangulaR is a package for calculating hybrid indices, heterozygosity, and building triangle plots
 
 ## Installation
 
@@ -48,6 +48,7 @@ library(vcfR)
 # Read in data
 data <- read.vcfR("../SecondaryContact/gen.19000.vcf", verbose = F)
 data
+
 # Or, use example vcfR object
 example.vcfR
 ```
@@ -94,10 +95,3 @@ missing.plot(hi.het)
 ```
 
 
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
