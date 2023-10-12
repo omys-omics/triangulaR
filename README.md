@@ -150,7 +150,7 @@ percent of missing data in each individual. View the triangle plot with
 samples colored by percent missing data to investigate its effect.
 
 ``` r
-# There is no missing data in this data.set, so all samples have the same color
+# There is no missing data in this dataset, so all samples have the same color
 missing.plot(hi.het)
 ```
 
