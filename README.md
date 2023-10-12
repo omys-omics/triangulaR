@@ -13,7 +13,7 @@ and building triangle plots
 ## Installation
 
 You can install the development version of triangulaR from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/omys-omics/triangulaR) with:
 
 ``` r
 # install.packages("devtools")

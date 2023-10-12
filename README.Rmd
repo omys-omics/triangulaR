@@ -22,7 +22,7 @@ triangulaR is a package for calculating hybrid indices, heterozygosity, and buil
 
 ## Installation
 
-You can install the development version of triangulaR from [GitHub](https://github.com/) with:
+You can install the development version of triangulaR from [GitHub](https://github.com/omys-omics/triangulaR) with:
 
 ``` r
 # install.packages("devtools")
