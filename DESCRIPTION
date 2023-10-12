@@ -1,5 +1,5 @@
 Package: triangulaR
-Title: What the Package Does (One Line, Title Case)
+Title: Calculate Hybrid Index and Heterozygosity from SNP data
 Version: 0.0.0.9000
 Authors@R: 
     person("Ben", "Wiens", , "bwiens36@gmail.com", role = c("aut", "cre"),
