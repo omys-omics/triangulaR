@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{triangle.plot}
 \alias{triangle.plot}
-\title{Generate a triangle plot using the output of hybridIndex}
+\title{triangle.plot}
 \usage{
 triangle.plot(
   data = NULL,
