@@ -168,6 +168,221 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
 }
 
 
+
+
+
+#' AIMnames
+#'
+#' Get the names of ancestry informative markers that pass a given allele frequency difference threshold
+#'
+#' @param vcfR data in vcfR format
+#' @param pm data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each sample must be assigned to a population
+#' @param p1 (character) name of parental population 1
+#' @param p2 (character) name of parental population 2
+#' @param difference (numeric) allele frequency difference threshold, must be between 0 and 1
+#'
+#' @return vector of locus names
+#' @export
+#'
+#' @importFrom vcfR extract.gt
+#'
+#' @examples
+#' #AIMnames(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20, difference = 1)
+AIMnames <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL) {
+  if (any(is.na(pm$pop))) {
+    stop("All individuals must be assigned to a population (no NAs in popmap)")
+  }
+
+  if (!(identical(sort(unique(colnames(vcfR@gt)))[-1], sort(unique(pm$id))))) {
+    stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
+  }
+
+  m <- extract.gt(vcfR)
+
+  # recode to allele counts
+  m[m=="0|0"] <- 0
+  m[m=="0|1"] <- 1
+  m[m=="1|0"] <- 1
+  m[m=="1|1"] <- 2
+  m[m=="0/0"] <- 0
+  m[m=="0/1"] <- 1
+  m[m=="1/0"] <- 1
+  m[m=="1/1"] <- 2
+
+  # Filter and subset the genotypes for the two populations
+  p1.gts <- m[, pm[pm$pop == p1, "id"]]
+  p2.gts <- m[, pm[pm$pop == p2, "id"]]
+
+  # convert to numeric
+  p1.gts[] <- sapply(p1.gts, as.numeric)
+  p2.gts[] <- sapply(p2.gts, as.numeric)
+
+  # Calculate allele frequencies for p1 and p2
+  af_p1 <- (rowSums(p1.gts == 1, na.rm = TRUE) + (2 * rowSums(p1.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p1.gts)))
+  af_p2 <- (rowSums(p2.gts == 1, na.rm = TRUE) + (2 * rowSums(p2.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p2.gts)))
+
+  # Calculate allele frequency differences
+  af_diff <- abs(af_p1 - af_p2)
+
+  # Create a data frame with allele frequencies and differences
+  af <- data.frame(p1 = af_p1, p2 = af_p2, diff = af_diff)
+
+  loci <- rownames(af[af$diff >= difference,])
+
+  return(loci)
+}
+
+
+
+
+
+
+#' specFreqDiff
+#'
+#' Calculate allele frequency difference for loci above difference threshold. For all allele frequency differences, set difference at 0
+#'
+#' @param vcfR data in vcfR format
+#' @param pm data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each sample must be assigned to a population
+#' @param p1 (character) name of parental population 1
+#' @param p2 (character) name of parental population 2
+#' @param difference (numeric) allele frequency difference threshold, must be between 0 and 1
+#'
+#' @return dataframe containing allele frequencies in parental pops and differences between them
+#' @export
+#'
+#' @importFrom vcfR extract.gt
+#'
+#' @examples
+#' #specFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20, difference = 1)
+specFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = 0) {
+  if (any(is.na(pm$pop))) {
+    stop("All individuals must be assigned to a population (no NAs in popmap)")
+  }
+
+  if (!(identical(sort(unique(colnames(vcfR@gt)))[-1], sort(unique(pm$id))))) {
+    stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
+  }
+
+  m <- extract.gt(vcfR)
+
+  # recode to allele counts
+  m[m=="0|0"] <- 0
+  m[m=="0|1"] <- 1
+  m[m=="1|0"] <- 1
+  m[m=="1|1"] <- 2
+  m[m=="0/0"] <- 0
+  m[m=="0/1"] <- 1
+  m[m=="1/0"] <- 1
+  m[m=="1/1"] <- 2
+
+  # Filter and subset the genotypes for the two populations
+  p1.gts <- m[, pm[pm$pop == p1, "id"]]
+  p2.gts <- m[, pm[pm$pop == p2, "id"]]
+
+  # convert to numeric
+  p1.gts[] <- sapply(p1.gts, as.numeric)
+  p2.gts[] <- sapply(p2.gts, as.numeric)
+
+  # Calculate allele frequencies for p1 and p2
+  af_p1 <- (rowSums(p1.gts == 1, na.rm = TRUE) + (2 * rowSums(p1.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p1.gts)))
+  af_p2 <- (rowSums(p2.gts == 1, na.rm = TRUE) + (2 * rowSums(p2.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p2.gts)))
+
+  # Calculate allele frequency differences
+  af_diff <- abs(af_p1 - af_p2)
+
+  # Create a data frame with allele frequencies and differences
+  af <- data.frame(p1 = af_p1, p2 = af_p2, diff = af_diff)
+
+  # Filter by the difference threshold
+  af <- af[af$diff >= difference, ]
+
+  # Print statement
+  s <- nrow(af)
+  cat(s, "sites passed allele frequency difference threshold\n")
+
+  return(af)
+}
+
+
+
+
+#' aimFreqDist
+#'
+#' Calculate frequencies of AIMs in parental pops. Allele frequency difference threshold must be >= 0.5
+#'
+#' @param vcfR data in vcfR format
+#' @param pm data.frame containing two columns, "id" and "pop". The ids must match those in the vcfR object, but don't need to be in the same order. Each sample must be assigned to a population
+#' @param p1 (character) name of parental population 1
+#' @param p2 (character) name of parental population 2
+#' @param difference (numeric) allele frequency difference threshold, must be between 0 and 1
+#'
+#' @return dataframe containing allele frequency of AIMs in parental pops and differences between them
+#' @export
+#'
+#' @importFrom vcfR extract.gt
+#'
+#' @examples
+#' #aimFreqDist(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20, difference = 1)
+aimFreqDist <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = NULL) {
+  if (any(is.na(pm$pop))) {
+    stop("All individuals must be assigned to a population (no NAs in popmap)")
+  }
+
+  if (!(identical(sort(unique(colnames(vcfR@gt)))[-1], sort(unique(pm$id))))) {
+    stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
+  }
+
+  if (difference < 0.5) {
+    stop("Allele frequency difference threshold must be >= 0.5")
+  }
+
+  m <- extract.gt(vcfR)
+
+  # recode to allele counts
+  m[m=="0|0"] <- 0
+  m[m=="0|1"] <- 1
+  m[m=="1|0"] <- 1
+  m[m=="1|1"] <- 2
+  m[m=="0/0"] <- 0
+  m[m=="0/1"] <- 1
+  m[m=="1/0"] <- 1
+  m[m=="1/1"] <- 2
+
+  # Filter and subset the genotypes for the two populations
+  p1.gts <- m[, pm[pm$pop == p1, "id"]]
+  p2.gts <- m[, pm[pm$pop == p2, "id"]]
+
+  # convert to numeric
+  p1.gts[] <- sapply(p1.gts, as.numeric)
+  p2.gts[] <- sapply(p2.gts, as.numeric)
+
+  # Calculate allele frequencies for p1 and p2
+  af_p1 <- (rowSums(p1.gts == 1, na.rm = TRUE) + (2 * rowSums(p1.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p1.gts)))
+  af_p2 <- (rowSums(p2.gts == 1, na.rm = TRUE) + (2 * rowSums(p2.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p2.gts)))
+
+  # Calculate allele frequency differences
+  af_diff <- abs(af_p1 - af_p2)
+
+  # Create a data frame with allele frequencies and differences
+  af <- data.frame(p1 = af_p1, p2 = af_p2, diff = af_diff)
+
+  # only keep loci with allele frequency difference above threshold
+  af <- af[af$diff >= difference,]
+
+  # polarize allele freqs
+  af[af$p1>0.5,"p1"] <- 1 - af[af$p1>0.5,"p1"]
+  af[af$p2<0.5,"p2"] <- 1 - af[af$p2<0.5,"p2"]
+
+  # print statement
+  s <- nrow(af)
+  print(paste0(s, " sites passed allele frequency difference threshold"))
+  return(af)
+}
+
+
+
+
+
 #' triangle.plot
 #'
 #' Generate a triangle plot using the output of hybridIndex
