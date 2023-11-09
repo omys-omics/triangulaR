@@ -135,17 +135,17 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
   p2.allele <- ifelse(af_p2 > af_p1, 2, 0)
 
   # Create a matrix to store hybrid index scores
-  n <- matrix(nrow = nrow(matrix), ncol = ncol(matrix))
+  n <- m(nrow = nrow(m), ncol = ncol(m))
 
   # Compare genotypes and assign scores
-  n[matrix == p1.allele] <- 0
-  n[matrix == 1] <- 1
-  n[matrix == p2.allele] <- 2
-  n[is.na(matrix)] <- NA
-  n[matrix == -9] <- NA
+  n[m == p1.allele] <- 0
+  n[m == 1] <- 1
+  n[m == p2.allele] <- 2
+  n[is.na(m)] <- NA
+  n[m == -9] <- NA
 
-  colnames(n) <- colnames(matrix)
-  rownames(n) <- rownames(matrix)
+  colnames(n) <- colnames(m)
+  rownames(n) <- rownames(m)
 
   # Count alleles and non-missing genotypes for each individual
   counts <- colSums(n, na.rm = TRUE)
@@ -159,8 +159,8 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
     id = names(hi),
     pop = pm[match(names(hi), pm$id), "pop"],
     hybrid.index = hi,
-    heterozygosity = colSums(matrix == 1, na.rm = TRUE) / colSums(!is.na(matrix)),
-    perc.missing = colSums(is.na(matrix)) / nrow(matrix)
+    heterozygosity = colSums(m == 1, na.rm = TRUE) / colSums(!is.na(m)),
+    perc.missing = colSums(is.na(m)) / nrow(m)
   )
 
   return(tri)
