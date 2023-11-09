@@ -25,57 +25,36 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
     stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
   }
 
-  # make matrices of genotypes for each parental pop
-  p1.gts <- data.frame(extract.gt(vcfR[samples = c(pm[pm$pop == p1,"id"])[[1]]]))
-  p2.gts <- data.frame(extract.gt(vcfR[samples = c(pm[pm$pop == p2,"id"])[[1]]]))
+  # Extract genotypes
+  m <- extract.gt(vcfR)
 
-  # make dataframe to keep track of frequency of "1" allele at each locus
-  af <- data.frame(matrix(nrow = nrow(p1.gts), ncol = 2))
-  colnames(af) <- c("p1", "p2")
-  rownames(af) <- rownames(p1.gts)
+  # recode alleles
+  m[m=="0|0"] <- 0
+  m[m=="0|1"] <- 1
+  m[m=="1|0"] <- 1
+  m[m=="1|1"] <- 2
+  m[m=="0/0"] <- 0
+  m[m=="0/1"] <- 1
+  m[m=="1/0"] <- 1
+  m[m=="1/1"] <- 2
 
-  # recode missing data
-  p1.gts[is.na(p1.gts)] <- -9
-  p2.gts[is.na(p2.gts)] <- -9
-  # recode alelles
-  p1.gts[p1.gts=="0|0"] <- 0
-  p1.gts[p1.gts=="0|1"] <- 1
-  p1.gts[p1.gts=="1|0"] <- 1
-  p1.gts[p1.gts=="1|1"] <- 2
-  p1.gts[p1.gts=="0/0"] <- 0
-  p1.gts[p1.gts=="0/1"] <- 1
-  p1.gts[p1.gts=="1/0"] <- 1
-  p1.gts[p1.gts=="1/1"] <- 2
-  p2.gts[p2.gts=="0|0"] <- 0
-  p2.gts[p2.gts=="0|1"] <- 1
-  p2.gts[p2.gts=="1|0"] <- 1
-  p2.gts[p2.gts=="1|1"] <- 2
-  p2.gts[p2.gts=="0/0"] <- 0
-  p2.gts[p2.gts=="0/1"] <- 1
-  p2.gts[p2.gts=="1/0"] <- 1
-  p2.gts[p2.gts=="1/1"] <- 2
+  # Filter and subset the genotypes for the two populations
+  p1.gts <- m[, pm[pm$pop == p1, "id"]]
+  p2.gts <- m[, pm[pm$pop == p2, "id"]]
 
   # convert to numeric
   p1.gts[] <- sapply(p1.gts, as.numeric)
   p2.gts[] <- sapply(p2.gts, as.numeric)
 
-  for (i in 1:nrow(af)) {
-    # p1:
-    # get genotypes for locus, remove missing data
-    loc.p1 <- p1.gts[i,]
-    loc.p1 <- loc.p1[loc.p1!=-9]
-    # add allele frequency of 1 to af dataframe
-    af[i,"p1"] <- sum(loc.p1)/(length(loc.p1)*2)
+  # Calculate allele frequencies for p1 and p2
+  af_p1 <- (rowSums(p1.gts == 1, na.rm = TRUE) + (2 * rowSums(p1.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p1.gts)))
+  af_p2 <- (rowSums(p2.gts == 1, na.rm = TRUE) + (2 * rowSums(p2.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p2.gts)))
 
-    #p2:
-    # get genotypes for locus, remove missing data
-    loc.p2 <- p2.gts[i,]
-    loc.p2 <- loc.p2[loc.p2!=-9]
-    # add allele frequency of 1 to af dataframe
-    af[i,"p2"] <- sum(loc.p2)/(length(loc.p2)*2)
-  }
-  # add allele frequency differences to af
-  af$diff <- abs(af[,"p1"] - af[,"p2"])
+  # Calculate allele frequency differences
+  af_diff <- abs(af_p1 - af_p2)
+
+  # Create a data frame with allele frequencies and differences
+  af <- data.frame(p1 = af_p1, p2 = af_p2, diff = af_diff)
 
   # get names of loci with allele frequency difference above threshold
   loci <- rownames(af[af$diff >= difference,])
@@ -87,7 +66,7 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
   loci.indices <- all.loci %in% loci
   loci.indices <- which(loci.indices)
 
-  # subset vcfR by loci with allele frequencies difference in parental pops above threshold
+  # subset vcfR by loci with allele frequency difference in parental pops above threshold
   vcfR.diff <- vcfR[loci.indices]
 
   # print statement
@@ -128,8 +107,7 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
   print(paste0("calculating hybrid indices and heterozygosities based on ", d, " sites"))
 
   m <- extract.gt(vcfR)
-  # recode missing data
-  m[is.na(m)] <- -9
+
   # recode to allele counts
   m[m=="0|0"] <- 0
   m[m=="0|1"] <- 1
@@ -139,94 +117,54 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
   m[m=="0/1"] <- 1
   m[m=="1/0"] <- 1
   m[m=="1/1"] <- 2
-  # make new matrix of same size as m
-  n <- matrix(nrow = nrow(m), ncol = ncol(m))
 
-  # make matrices of genotypes for each parental pop
-  p1.gts <- data.frame(m[,c(pm[pm$pop == p1,"id"])[[1]]])
-  p2.gts <- data.frame(m[,c(pm[pm$pop == p2,"id"])[[1]]])
-
-  # make dataframe to keep track of frequency of "1" allele at each locus
-  af <- data.frame(matrix(nrow = nrow(m), ncol = 2))
-  colnames(af) <- c("p1", "p2")
-  rownames(af) <- rownames(m)
+  # Filter and subset the genotypes for the two populations
+  p1.gts <- m[, pm[pm$pop == p1, "id"]]
+  p2.gts <- m[, pm[pm$pop == p2, "id"]]
 
   # convert to numeric
   p1.gts[] <- sapply(p1.gts, as.numeric)
   p2.gts[] <- sapply(p2.gts, as.numeric)
 
-  for (i in 1:nrow(m)) {
+  # Calculate allele frequencies for p1 and p2
+  af_p1 <- (rowSums(p1.gts == 1, na.rm = TRUE) + (2 * rowSums(p1.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p1.gts)))
+  af_p2 <- (rowSums(p2.gts == 1, na.rm = TRUE) + (2 * rowSums(p2.gts == 2, na.rm = TRUE))) / (2 * rowSums(!is.na(p2.gts)))
 
-    # p1:
-    # get genotypes for locus, remove missing data
-    loc.p1 <- p1.gts[i,]
-    loc.p1 <- loc.p1[loc.p1!=-9]
-    # add allele frequency of 1 to af dataframe
-    af[i,"p1"] <- sum(loc.p1)/(length(loc.p1)*2)
+  # Determine p1 and p2 allele based on allele frequencies
+  p1.allele <- ifelse(af_p1 > af_p2, 2, 0)
+  p2.allele <- ifelse(af_p2 > af_p1, 2, 0)
 
-    #p2:
-    # get genotypes for locus, remove missing data
-    loc.p2 <- p2.gts[i,]
-    loc.p2 <- loc.p2[loc.p2!=-9]
-    # add allele frequency of 1 to af dataframe
-    af[i,"p2"] <- sum(loc.p2)/(length(loc.p2)*2)
+  # Create a matrix to store hybrid index scores
+  n <- matrix(nrow = nrow(matrix), ncol = ncol(matrix))
 
-    # for each locus, if parental pop 1 has a higher frequency of "2" allele, assign p1.allele as 2
-    if (af[i,"p1"] > af[i,"p2"]) {
-      p1.allele <- 2
-      # else, if parental pop1 has a lower frequency of "2 allele", assign p1.allele as 0
-    } else {
-      p1.allele <- 0
-    }
+  # Compare genotypes and assign scores
+  n[matrix == p1.allele] <- 0
+  n[matrix == 1] <- 1
+  n[matrix == p2.allele] <- 2
+  n[is.na(matrix)] <- NA
+  n[matrix == -9] <- NA
 
-    # compare every individual to parental pop 1, giving scores of:
-    # 0 = matching p1
-    # 1 = being a het
-    # 2 = not matching p1 (matching p2)
-    # -9 = NA
-    for (j in 1:ncol(m)) {
-      if (m[i,j] == -9) {
-        next
-      }
-      if (m[i,j] == p1.allele) {
-        n[i,j] <- 0
-      } else if (m[i,j] == 1) {
-        n[i,j] <- 1
-      } else {
-        n[i,j] <- 2
-      }
-    }
-  }
-  colnames(n) <- colnames(m)
-  rownames(n) <- rownames(m)
-  # count alleles, removing NAs
-  counts <- colSums(n, na.rm = T)
-  # count nonmissing genotypes for each ind
+  colnames(n) <- colnames(matrix)
+  rownames(n) <- rownames(matrix)
+
+  # Count alleles and non-missing genotypes for each individual
+  counts <- colSums(n, na.rm = TRUE)
   sites <- colSums(!apply(n, MARGIN = 2, is.na))
-  # calculate hybrid index
-  hi <- counts / (sites*2)
-  # make dataframe
-  tri <- data.frame(matrix(nrow = nrow(pm), ncol = 5))
-  colnames(tri) <- c("id", "pop", "hybrid.index", "heterozygosity", "perc.missing")
-  # add id column
-  tri$id <- names(hi)
-  tri$hybrid.index <- hi
-  # add pop to hybrid index dataframe
-  for (ind in pm$id) {
-    tri[tri$id == ind, "pop"] <- pm[pm$id == ind, "pop"]
-  }
-  # get heterozygosity (don't count NAs as FALSE, leave as NA)
-  het <- is.het(extract.gt(vcfR), na_is_false = F)
-  for (ind in pm$id) {
-    # divide the number of sites that are het by the number of sites that have data
-    tri[tri$id == ind, "heterozygosity"] <- sum(het[,ind], na.rm = T)/sum(!is.na(het[,ind]))
-  }
-  #calculate missingness by individual
-  ms <- colSums(is.na(vcfR@gt))/nrow(vcfR@gt)
-  #add missingness to df
-  tri$perc.missing <- ms[-1]
+
+  # Calculate hybrid index
+  hi <- counts / (sites * 2)
+
+  # Create a dataframe for the results
+  tri <- data.frame(
+    id = names(hi),
+    pop = pm[match(names(hi), pm$id), "pop"],
+    hybrid.index = hi,
+    heterozygosity = colSums(matrix == 1, na.rm = TRUE) / colSums(!is.na(matrix)),
+    perc.missing = colSums(is.na(matrix)) / nrow(matrix)
+  )
 
   return(tri)
+
 }
 
 
