@@ -135,7 +135,7 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
   p2.allele <- ifelse(af_p2 > af_p1, 2, 0)
 
   # Create a matrix to store hybrid index scores
-  n <- m(nrow = nrow(m), ncol = ncol(m))
+  n <- matrix(nrow = nrow(m), ncol = ncol(m))
 
   # Compare genotypes and assign scores
   n[m == p1.allele] <- 0
