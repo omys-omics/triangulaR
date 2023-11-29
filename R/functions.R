@@ -21,7 +21,7 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
     stop("All individuals must be assigned to a population (no NAs in popmap)")
   }
 
-  if (!(identical(sort(unique(colnames(vcfR@gt)))[-1], sort(unique(pm$id))))) {
+  if (!(identical(sort(unique(colnames(vcfR@gt)[-1])), sort(unique(pm$id))))) {
     stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
   }
 
@@ -98,7 +98,7 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
     stop("All individuals must be assigned to a population (no NAs in popmap)")
   }
 
-  if (!(identical(sort(unique(colnames(vcfR@gt)))[-1], sort(unique(pm$id))))) {
+  if (!(identical(sort(unique(colnames(vcfR@gt)[-1])), sort(unique(pm$id))))) {
     stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
   }
 
@@ -193,7 +193,7 @@ AIMnames <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = 
     stop("All individuals must be assigned to a population (no NAs in popmap)")
   }
 
-  if (!(identical(sort(unique(colnames(vcfR@gt)))[-1], sort(unique(pm$id))))) {
+  if (!(identical(sort(unique(colnames(vcfR@gt)[-1])), sort(unique(pm$id))))) {
     stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
   }
 
@@ -259,7 +259,7 @@ specFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differenc
     stop("All individuals must be assigned to a population (no NAs in popmap)")
   }
 
-  if (!(identical(sort(unique(colnames(vcfR@gt)))[-1], sort(unique(pm$id))))) {
+  if (!(identical(sort(unique(colnames(vcfR@gt)[-1])), sort(unique(pm$id))))) {
     stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
   }
 
@@ -328,7 +328,7 @@ aimFreqDist <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference
     stop("All individuals must be assigned to a population (no NAs in popmap)")
   }
 
-  if (!(identical(sort(unique(colnames(vcfR@gt)))[-1], sort(unique(pm$id))))) {
+  if (!(identical(sort(unique(colnames(vcfR@gt)[-1])), sort(unique(pm$id))))) {
     stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
   }
 
