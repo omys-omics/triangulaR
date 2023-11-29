@@ -42,6 +42,16 @@ step, see [SNPfiltR](https://github.com/DevonDeRaad/SNPfiltR).
 library(triangulaR)
 #> Loading required package: ggplot2
 #> Warning: package 'ggplot2' was built under R version 4.0.5
+#> This is triangulaR v.0.0.0.9000
+#> 
+#>           /\
+#>          /  \
+#>         /    \
+#>        /______\
+#> 
+#> Usage information is available at: https://github.com/omys-omics/triangulaR/ 
+#> 
+#> Please cite the following if you use triangulaR in a publication:
 library(vcfR)
 #> 
 #>    *****       ***   vcfR   ***       *****
@@ -113,6 +123,10 @@ loci. There is a balance between using a small amount of highly
 diagnostic site (e.g. fixed differences) and a large amount of less
 diagnostic sites. I recommend trying difference values for the allele
 frequency difference threshold to see how this value affects results.
+
+(If your population labels are string characters instead of numbers, you
+will need to put the pop in quotations, e.g. p1 = “parental1” for the
+function below)
 
 ``` r
 # Create a new vcfR object composed only of sites above the given allele frequency difference threshold

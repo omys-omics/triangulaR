@@ -65,6 +65,8 @@ print(tail(example.popmap))
 #### Step 3: Choose sites above an allele frequency difference threshold
 Theoretically, the hybrid index of an individual represents the proportion of ancestry received from each parental population. In practice, one way to calculate hybrid indices is by identifying loci with allele frequency differences above a chosen threshold in the parental populations and scoring individuals by allele counts at those loci. There is a balance between using a small amount of highly diagnostic site (e.g. fixed differences) and a large amount of less diagnostic sites. I recommend trying difference values for the allele frequency difference threshold to see how this value affects results. 
 
+(If your population labels are string characters instead of numbers, you will need to put the pop in quotations, e.g. p1 = "parental1" for the function below)
+
 ```{r}
 # Create a new vcfR object composed only of sites above the given allele frequency difference threshold
 example.vcfR.diff <- alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20, difference = 0.6)
