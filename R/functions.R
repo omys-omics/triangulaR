@@ -39,8 +39,8 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
   m[m=="1/1"] <- 2
 
   # Filter and subset the genotypes for the two populations
-  p1.gts <- m[, pm[pm$pop == p1,]]$id
-  p2.gts <- m[, pm[pm$pop == p2,]]$id
+  p1.gts <- m[, pm[pm$pop == p1,]$id]
+  p2.gts <- m[, pm[pm$pop == p2,]$id]
 
   # convert to numeric
   p1.gts[] <- sapply(p1.gts, as.numeric)
