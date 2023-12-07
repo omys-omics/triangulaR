@@ -119,8 +119,8 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
   m[m=="1/1"] <- 2
 
   # Filter and subset the genotypes for the two populations
-  p1.gts <- m[, pm[pm$pop == p1, "id"]]
-  p2.gts <- m[, pm[pm$pop == p2, "id"]]
+  p1.gts <- m[, pm[pm$pop == p1,]$id]
+  p2.gts <- m[, pm[pm$pop == p2,]$id]
 
   # convert to numeric
   p1.gts[] <- sapply(p1.gts, as.numeric)
@@ -210,8 +210,8 @@ AIMnames <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference = 
   m[m=="1/1"] <- 2
 
   # Filter and subset the genotypes for the two populations
-  p1.gts <- m[, pm[pm$pop == p1, "id"]]
-  p2.gts <- m[, pm[pm$pop == p2, "id"]]
+  p1.gts <- m[, pm[pm$pop == p1,]$id]
+  p2.gts <- m[, pm[pm$pop == p2,]$id]
 
   # convert to numeric
   p1.gts[] <- sapply(p1.gts, as.numeric)
@@ -276,8 +276,8 @@ specFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differenc
   m[m=="1/1"] <- 2
 
   # Filter and subset the genotypes for the two populations
-  p1.gts <- m[, pm[pm$pop == p1, "id"]]
-  p2.gts <- m[, pm[pm$pop == p2, "id"]]
+  p1.gts <- m[, pm[pm$pop == p1,]$id]
+  p2.gts <- m[, pm[pm$pop == p2,]$id]
 
   # convert to numeric
   p1.gts[] <- sapply(p1.gts, as.numeric)
@@ -349,8 +349,8 @@ aimFreqDist <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference
   m[m=="1/1"] <- 2
 
   # Filter and subset the genotypes for the two populations
-  p1.gts <- m[, pm[pm$pop == p1, "id"]]
-  p2.gts <- m[, pm[pm$pop == p2, "id"]]
+  p1.gts <- m[, pm[pm$pop == p1,]$id]
+  p2.gts <- m[, pm[pm$pop == p2,]$id]
 
   # convert to numeric
   p1.gts[] <- sapply(p1.gts, as.numeric)
