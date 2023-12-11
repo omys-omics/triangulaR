@@ -409,11 +409,11 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
   }
   if(outline) {
     p <- ggplot(data, aes(x=hybrid.index, y=heterozygosity, color=as.factor(pop))) +
-      geom_jitter(cex = cex, alpha = alpha, width = jitter, height = jitter)+
       geom_segment(aes(x = 0.5, xend = 1, y = 1, yend = 0), color = "black") +
       geom_segment(aes(x = 0, xend = 0.5, y = 0, yend = 1), color = "black") +
       geom_segment(aes(x = 0, xend = 1, y = 0, yend = 0), color = "black") +
       stat_function(fun = function(hi) 2*hi*(1-hi), xlim = c(0,1), color = "black", linetype = "dashed") +
+      geom_jitter(cex = cex, alpha = alpha, width = jitter, height = jitter)+
       guides(shape = guide_legend(override.aes = list(size = 5), order=2, label.theme= element_text(face="italic")))+
       xlab(paste("Hybrid Index"))+
       ylab(paste("Heterozygosity"))+
@@ -459,11 +459,11 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
 missing.plot <- function(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 0) {
   if(outline) {
     p <- ggplot(data, aes(x=hybrid.index, y=heterozygosity, color=perc.missing)) +
-      geom_jitter(cex = cex, alpha = alpha, width = jitter, height = jitter)+
       geom_segment(aes(x = 0.5, xend = 1, y = 1, yend = 0), color = "black") +
       geom_segment(aes(x = 0, xend = 0.5, y = 0, yend = 1), color = "black") +
       geom_segment(aes(x = 0, xend = 1, y = 0, yend = 0), color = "black") +
       stat_function(fun = function(hi) 2*hi*(1-hi), xlim = c(0,1), color = "black", linetype = "dashed") +
+      geom_jitter(cex = cex, alpha = alpha, width = jitter, height = jitter)+
       guides(shape = guide_legend(override.aes = list(size = 5), order=2, label.theme= element_text(face="italic")))+
       xlab(paste("Hybrid Index"))+
       ylab(paste("Heterozygosity"))+
