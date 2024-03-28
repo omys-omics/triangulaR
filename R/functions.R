@@ -416,7 +416,7 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
       geom_jitter(cex = cex, alpha = alpha, width = jitter, height = jitter)+
       guides(shape = guide_legend(override.aes = list(size = 5), order=2, label.theme= element_text(face="italic")))+
       xlab(paste("Hybrid Index"))+
-      ylab(paste("Heterozygosity"))+
+      ylab(paste("Interclass Heterozygosity"))+
       labs(title = "") +
       scale_color_manual("pop", values = colors) +
       ylim(c(-0.05,1.05)) +
@@ -428,7 +428,7 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
       geom_jitter(cex = cex, alpha = alpha, width = jitter, height = jitter)+
       guides(shape = guide_legend(override.aes = list(size = 5), order=2, label.theme= element_text(face="italic")))+
       xlab(paste("Hybrid Index"))+
-      ylab(paste("Heterozygosity"))+
+      ylab(paste("Interclass Heterozygosity"))+
       labs(title = "") +
       scale_color_manual("pop", values = colors) +
       ylim(c(-0.05,1.05)) +
@@ -466,7 +466,7 @@ missing.plot <- function(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 
       geom_jitter(cex = cex, alpha = alpha, width = jitter, height = jitter)+
       guides(shape = guide_legend(override.aes = list(size = 5), order=2, label.theme= element_text(face="italic")))+
       xlab(paste("Hybrid Index"))+
-      ylab(paste("Heterozygosity"))+
+      ylab(paste("Interclass Heterozygosity"))+
       labs(title = "") +
       ylim(c(-0.05,1.05)) +
       xlim(c(-0.05,1.05)) +
@@ -477,7 +477,7 @@ missing.plot <- function(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 
       geom_jitter(cex = cex, alpha = alpha, width = jitter, height = jitter)+
       guides(shape = guide_legend(override.aes = list(size = 5), order=2, label.theme= element_text(face="italic")))+
       xlab(paste("Hybrid Index"))+
-      ylab(paste("Heterozygosity"))+
+      ylab(paste("Interclass Heterozygosity"))+
       labs(title = "") +
       ylim(c(-0.05,1.05)) +
       xlim(c(-0.05,1.05)) +
