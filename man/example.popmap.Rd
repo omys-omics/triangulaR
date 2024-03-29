@@ -5,7 +5,7 @@
 \alias{example.popmap}
 \title{Example of a popmap}
 \format{
-An object of class \code{data.frame} with 420 rows and 2 columns.
+An object of class \code{data.frame} with 120 rows and 2 columns.
 }
 \usage{
 example.popmap

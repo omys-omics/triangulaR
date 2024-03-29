@@ -5,7 +5,7 @@
 \alias{example.vcfR}
 \title{Example of a vcfR object}
 \format{
-An object of class \code{vcfR} of dimension 1215 x 8 x 421.
+An object of class \code{vcfR} of dimension 6177 x 8 x 121.
 }
 \usage{
 example.vcfR
