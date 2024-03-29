@@ -65,11 +65,10 @@ print(tail(example.popmap))
 #### Step 3: Choose sites above an allele frequency difference threshold
 Theoretically, the hybrid index of an individual represents the proportion of ancestry received from each parental population. In practice, one way to calculate hybrid indices is by identifying loci with allele frequency differences above a chosen threshold in the parental populations and scoring individuals by allele counts at those loci. There is a balance between using a small amount of highly diagnostic site (e.g. fixed differences) and a large amount of less diagnostic sites. I recommend trying difference values for the allele frequency difference threshold to see how this value affects results. 
 
-(If your population labels are string characters instead of numbers, you will need to put the pop in quotations, e.g. p1 = "parental1" for the function below)
 
 ```{r}
 # Create a new vcfR object composed only of sites above the given allele frequency difference threshold
-example.vcfR.diff <- alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20, difference = 0.6)
+example.vcfR.diff <- alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = "P1", p2 = "P2", difference = 0.9)
 ```
 
 #### Step 4: Calculate hybrid index and heterozygosity for each sample
@@ -77,15 +76,15 @@ Once sites above the allele frequency difference threshold have been identified,
 
 ```{r}
 # Calculate hybrid index and heterozygosity for each sample. Values are returned in a data.frame
-hi.het <- hybridIndex(vcfR = example.vcfR.diff, pm = example.popmap, p1 = 0, p2 = 20)
+hi.het <- hybridIndex(vcfR = example.vcfR.diff, pm = example.popmap, p1 = "P1", p2 = "P2")
 ```
 
 #### Step 5: Visualize results as a triangle plot
 ```{r}
 # Generate colors (or leave blank to use default)
-cols <- colorRampPalette(colors = c("#313695", "khaki2", "#a50026"))
+cols <- c("#af8dc3", "#7fbf7b", "#bababa", "#878787", "#762a83", "#1b7837")
 # View triangle plot
-triangle.plot(hi.het, colors = cols(21))
+triangle.plot(hi.het, colors = cols)
 ```
 
 #### Step 6: Color triangle plot by missing data

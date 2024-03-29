@@ -74,10 +74,10 @@ data
 # Or, use example vcfR object
 example.vcfR
 #> ***** Object of Class vcfR *****
-#> 420 samples
+#> 120 samples
 #> 1 CHROMs
-#> 1,215 variants
-#> Object size: 4.2 Mb
+#> 6,177 variants
+#> Object size: 7.1 Mb
 #> 0 percent missing data
 #> *****        *****         *****
 ```
@@ -95,21 +95,21 @@ strings.
 ``` r
 # Here is an example of what a popmap should look like
 print(head(example.popmap))
-#>   id pop
-#> 1 i0   0
-#> 2 i1   0
-#> 3 i2   0
-#> 4 i3   0
-#> 5 i4   0
-#> 6 i5   0
+#>     id pop
+#> 1  i55  P1
+#> 2 i159  P1
+#> 3 i245  P1
+#> 4 i246  P1
+#> 5 i264  P1
+#> 6 i526  P1
 print(tail(example.popmap))
-#>       id pop
-#> 415 i414  20
-#> 416 i415  20
-#> 417 i416  20
-#> 418 i417  20
-#> 419 i418  20
-#> 420 i419  20
+#>         id pop
+#> 115 bc2.15 BC2
+#> 116 bc2.16 BC2
+#> 117 bc2.17 BC2
+#> 118 bc2.18 BC2
+#> 119 bc2.19 BC2
+#> 120 bc2.20 BC2
 ```
 
 #### Step 3: Choose sites above an allele frequency difference threshold
@@ -124,14 +124,10 @@ diagnostic site (e.g. fixed differences) and a large amount of less
 diagnostic sites. I recommend trying difference values for the allele
 frequency difference threshold to see how this value affects results.
 
-(If your population labels are string characters instead of numbers, you
-will need to put the pop in quotations, e.g. p1 = “parental1” for the
-function below)
-
 ``` r
 # Create a new vcfR object composed only of sites above the given allele frequency difference threshold
-example.vcfR.diff <- alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = 0, p2 = 20, difference = 0.6)
-#> [1] "216 sites passed allele frequency difference threshold"
+example.vcfR.diff <- alleleFreqDiff(vcfR = example.vcfR, pm = example.popmap, p1 = "P1", p2 = "P2", difference = 0.9)
+#> [1] "50 sites passed allele frequency difference threshold"
 ```
 
 #### Step 4: Calculate hybrid index and heterozygosity for each sample
@@ -142,17 +138,17 @@ calculated.
 
 ``` r
 # Calculate hybrid index and heterozygosity for each sample. Values are returned in a data.frame
-hi.het <- hybridIndex(vcfR = example.vcfR.diff, pm = example.popmap, p1 = 0, p2 = 20)
-#> [1] "calculating hybrid indices and heterozygosities based on 216 sites"
+hi.het <- hybridIndex(vcfR = example.vcfR.diff, pm = example.popmap, p1 = "P1", p2 = "P2")
+#> [1] "calculating hybrid indices and heterozygosities based on 50 sites"
 ```
 
 #### Step 5: Visualize results as a triangle plot
 
 ``` r
 # Generate colors (or leave blank to use default)
-cols <- colorRampPalette(colors = c("#313695", "khaki2", "#a50026"))
+cols <- c("#af8dc3", "#7fbf7b", "#bababa", "#878787", "#762a83", "#1b7837")
 # View triangle plot
-triangle.plot(hi.het, colors = cols(21))
+triangle.plot(hi.het, colors = cols)
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
