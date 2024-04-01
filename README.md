@@ -23,7 +23,8 @@ devtools::install_github("omys-omics/triangulaR")
 ## Citation
 
 If you publish any work that uses triangulaR, please consider citing the
-following paper:
+following paper (currently available as a preprint):
+<https://www.biorxiv.org/content/10.1101/2024.03.28.587167v1>
 
 ## How to use this package:
 
