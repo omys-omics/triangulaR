@@ -7,8 +7,9 @@
 
 <!-- badges: end -->
 
-triangulaR is a package for calculating hybrid indices, heterozygosity,
-and building triangle plots
+triangulaR is a package for identifying ancestry-informative markers
+(AIMS), calculating hybrid indices, interclass heterozygosity, and
+building triangle plots
 
 ## Installation
 
