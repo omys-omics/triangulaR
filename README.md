@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# triangulaR
+# triangulaR <img src="man/figures/hex_logo.png" align="right" alt="" width="180" />
 
 <!-- badges: start -->
 
