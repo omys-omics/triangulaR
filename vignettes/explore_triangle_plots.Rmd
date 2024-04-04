@@ -33,23 +33,8 @@ Example with simulated data:
 4. Calculate HI and HET
 5. Compare triangle plots
 
-Shiny app: choose number of parental samples, d, and number of SNPs that pass (downsample), build triangle plot
 
 
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 
 
