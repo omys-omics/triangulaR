@@ -20,9 +20,8 @@ Let's consider the hybrid index and interclass heterozygosity of individuals at 
 
 Based on the above formulas, we can calculate the hybrid index and interclass heterozygosity of any offspring given only the average allele frequency of p1 alleles in the parents. 
 
-```{r cars}
-library(ggplot2, quietly = T)
-```
+
+![All offspring through six generations, after all possible matings in the previous generation occur](../man/figures/FigureS1.png)
 
 ### Try it out
 
