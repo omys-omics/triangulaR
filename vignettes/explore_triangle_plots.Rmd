@@ -14,7 +14,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Punnet Squares
 
-### Hardy-Weinbergy Equilibrium
+### Hardy-Weinberg Equilibrium
+
+Let's consider the hybrid index and interclass heterozygosity of individuals at sites that are fixed for alternate alelles in the parental populations. When only considering fixed differences, it follows that hybrid index equates to the frequency of p1 alleles across the genome. Similarly, interclass heterozygosity equates to the frequency of p1p2 genotypes across the genomes.
+
+Based on the above formulas, we can calculate the hybrid index and interclass heterozygosity of any offspring given only the average allele frequency of p1 alleles in the parents. 
 
 ```{r cars}
 library(ggplot2, quietly = T)
