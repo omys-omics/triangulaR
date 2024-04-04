@@ -1,0 +1,87 @@
+---
+title: "Explore Triangle Plots"
+author: "Ben Wiens"
+date: "4/4/2024"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## 2000
+
+# Introduction
+
+### Punnet Squares
+
+### Hardy-Weinbergy Equilibrium
+
+```{r cars}
+library(ggplot2, quietly = T)
+```
+
+### Try it out
+
+
+Example with simulated data:
+1. See distribution of allele frequency differences
+2. Get names of AIMs
+3. Try multiple thresholds and get vcfRs
+4. Calculate HI and HET
+5. Compare triangle plots
+
+Shiny app: choose number of parental samples, d, and number of SNPs that pass (downsample), build triangle plot
+
+
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
+</style>
+
+<div class="shiny-app-frame"> 
+<iframe src="https://omys-omics.shinyapps.io/Hybrid_Offspring/" width="1000" height="1000">
+</iframe>
+</div>
+
+
+
+Example with real data:
+1. See distribution of allele frequency differences
+2. Try multiple thresholds and get vcfRs
+3. Calculate HI and HET
+4. Compare triangle plots
+5. Color by missing data
+
+### Try changing parameters to see how they impact hybrid identification
+
+
+
+
+
+</style>
+
+<div class="shiny-app-frame"> 
+<iframe src="https://omys-omics.shinyapps.io/Simulate_hybrid_parameters/" width="1000" height="2000">
+</iframe>
+</div>
+
+
+
+
+
+
