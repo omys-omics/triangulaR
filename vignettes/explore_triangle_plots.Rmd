@@ -81,7 +81,7 @@ The dashed line on the above triangle plot denotes the expected hybrid index and
 
 ### Triangle plots in practice
 
-When analyzing empirical genetic datasets, there are a number of factors that will influence the accuracy and precision of estimated hybrid indices and interclass heterozygosity (Wiens & Colella, 2024)
+When analyzing empirical genetic datasets, there are a number of factors that will influence the accuracy and precision of estimated hybrid indices and interclass heterozygosity (Wiens & Colella, 2024). 
 
 
 ### Try changing parameters to see how they impact hybrid identification
@@ -99,8 +99,8 @@ When analyzing empirical genetic datasets, there are a number of factors that wi
 
 
 ### References
-Hahn, M. W. (2018). Molecular population genetics. Oxford University Press.; Sinauer Associates.
-Wiens, B. J., & Colella, J. P. (2024). triangulaR: an R package for identifying AIMs and building 
-  triangle plots using SNP data from hybrid zones. bioRxiv, 2024-03.
+Hahn, M.W. (2018). Molecular population genetics. Oxford University Press. Sinauer Associates.
+Wiens, B.J., & Colella, J.P. (2024). triangulaR: an R package for identifying AIMs 
+|    and building triangle plots using SNP data from hybrid zones. bioRxiv, 2024.
 
 
