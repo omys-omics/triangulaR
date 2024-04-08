@@ -79,9 +79,9 @@
 
     
     
-<div class="section level3">
-<h3 id="new">new<a class="anchor" aria-label="anchor" href="#new"></a>
-</h3>
+<div class="section level2">
+<h2 id="under-construction">Under Construction<a class="anchor" aria-label="anchor" href="#under-construction"></a>
+</h2>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
@@ -111,6 +111,42 @@ parental populations. When only considering fixed differences, it
 follows that hybrid index equates to the frequency of p1 alleles across
 the genome. Similarly, interclass heterozygosity equates to the
 frequency of p1p2 genotypes across the genomes.</p>
+<p>When the parents have the same hybrid index, they can be thought of
+similarly as a population that is in HWE, and the above formulas can be
+used to calculate the hybrid index and interclass heterozygosity of
+offspring. For example, let’s consider a cross between two F1s. Both
+parents have a hybrid index of 0.5, which means the frequency of the
+<span class="math inline">\(p_1\)</span> allele is 0.5. Using only this
+information, we can calculate the genotype frequencies of the offspring
+(F2s).</p>
+<p><span class="math display">\[
+p_{11} = 0.5^2 = 0.25
+\]</span> <span class="math display">\[
+p_{12} = 2(0.5)(1-0.5) = 0.5
+\]</span> <span class="math display">\[
+p_{22} = (1-0.5)^2 =0.25
+\]</span> From the genotype frequencies of the offspring, we can obtain
+the frequency of the <span class="math inline">\(p_1\)</span> allele by
+dividing the frequency of <span class="math inline">\(p_12\)</span>
+genotype by <span class="math inline">\(2\)</span> (because the and the
+<span class="math inline">\(p_1\)</span> allele only occurs once in that
+genotype) and summing with the frequency of the <span class="math inline">\(p_11\)</span> genotype: <span class="math display">\[
+p_1 = 0.5(p_{12}) + p_{11} = 0.5(0.5) + 0.25 = 0.5
+\]</span> Therefore, we obtain the expected hybrid index (0.5, frequency
+of the <span class="math inline">\(p_1\)</span> allele) and interclass
+heterozygosity (0.5, frequency of the <span class="math inline">\(p_{12\)</span> genotype) in the F2 generation.</p>
+<p>However, for crosses between parents with different hybrid indices,
+we must slighly modify the above formulas, because the parents are no
+longer in HWE. To calculate the genotype frequencies for offspring in
+such cases, we must take into account the difference in hybrid index
+between the two parents. This is done by calculating the variance (<span class="math inline">\(σ^2\)</span>) of the <span class="math inline">\(p_1\)</span> allele frequency in the two parents:
+<span class="math display">\[
+σ^2 = \frac{Σ (p_{1i} − \overline{p_1})^2} {N}
+\]</span> where <span class="math inline">\(p_{1i}\)</span> is the
+frequency of the <span class="math inline">\(p_1\)</span> allele in the
+<span class="math inline">\(ith\)</span> parent and <span class="math inline">\(\overline{p_1}\)</span> is the avereage frequency
+of the <span class="math inline">\(p_1\)</span> allele in the parents
+(Hahn, 2018).</p>
 <p>Based on the above formulas, we can calculate the hybrid index and
 interclass heterozygosity of any offspring given only the average allele
 frequency of p1 alleles in the parents.</p>
@@ -143,6 +179,12 @@ identification<a class="anchor" aria-label="anchor" href="#try-changing-paramete
 <iframe src="https://omys-omics.shinyapps.io/Simulate_hybrid_parameters/" width="1000" height="1200">
 </iframe>
 </div>
+</div>
+<div class="section level4">
+<h4 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h4>
+<p>Hahn, M. W. (2018). Molecular population genetics. Oxford University
+Press.; Sinauer Associates.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
