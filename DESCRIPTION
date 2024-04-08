@@ -1,6 +1,6 @@
 Package: triangulaR
 Title: Calculate Hybrid Index and Heterozygosity from SNP data
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Ben", "Wiens", , "bwiens36@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6125-4579"))
