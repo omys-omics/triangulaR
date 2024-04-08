@@ -116,9 +116,9 @@ similarly as a population that is in HWE, and the above formulas can be
 used to calculate the hybrid index and interclass heterozygosity of
 offspring. For example, let’s consider a cross between two F1s. Both
 parents have a hybrid index of 0.5, which means the frequency of the
-<span class="math inline">\(p_1\)</span> allele is 0.5. Using only this
-information, we can calculate the genotype frequencies of the offspring
-(F2s).</p>
+<span class="math inline">\(p_1\)</span> allele across the genome is
+0.5. Using only this information, we can calculate the genome-wide
+genotype frequencies of the offspring (F2s).</p>
 <p><span class="math display">\[
 p_{11} = 0.5^2 = 0.25
 \]</span> <span class="math display">\[
@@ -133,7 +133,8 @@ genotype) and summing with the frequency of the <span class="math inline">\(p_11
 p_1 = 0.5(p_{12}) + p_{11} = 0.5(0.5) + 0.25 = 0.5
 \]</span> Therefore, we obtain the expected hybrid index (0.5, frequency
 of the <span class="math inline">\(p_1\)</span> allele) and interclass
-heterozygosity (0.5, frequency of the <span class="math inline">\(p_{12\)</span> genotype) in the F2 generation.</p>
+heterozygosity (0.5, frequency of the <span class="math inline">\(p_{12}\)</span> genotype) in the F2
+generation.</p>
 <p>However, for crosses between parents with different hybrid indices,
 we must slighly modify the above formulas, because the parents are no
 longer in HWE. To calculate the genotype frequencies for offspring in
@@ -155,13 +156,13 @@ p_{22} = (1-\overline{p_1})^2 - σ^2
 \]</span></p>
 <p>Based on the above formulas, we can calculate the hybrid index and
 interclass heterozygosity of any offspring given only the average allele
-frequency of p1 alleles in the parents. Try it out for yourself by
-adjusting the hybrid index and interclass heterozygosity of the parents,
-and seeing where the hybrid offspring would occur on a triangle
-plot:</p>
+frequency of <span class="math inline">\(p_1\)</span> alleles in the
+parents. Try it out for yourself by adjusting the hybrid index and
+interclass heterozygosity of the parents, and seeing where the hybrid
+offspring would occur on a triangle plot:</p>
 
 <div class="shiny-app-frame">
-<iframe src="https://omys-omics.shinyapps.io/Hybrid_Offspring/" width="1000" height="1000">
+<iframe src="https://omys-omics.shinyapps.io/Hybrid_Offspring/" width="1000" height="550">
 </iframe>
 </div>
 <p>The dashed line on the above triangle plot denotes the expected
@@ -203,7 +204,7 @@ identification<a class="anchor" aria-label="anchor" href="#try-changing-paramete
 </h4>
 
 <div class="shiny-app-frame">
-<iframe src="https://omys-omics.shinyapps.io/Simulate_hybrid_parameters/" width="1000" height="1100">
+<iframe src="https://omys-omics.shinyapps.io/Simulate_hybrid_parameters/" width="1000" height="1000">
 </iframe>
 </div>
 </div>
