@@ -16,7 +16,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Hardy-Weinberg Equilibrium
 
+Hardy-Weinberg Equilibirum states that under neutral evolutionary assumptions, the genotype frequencies ($p_{11}$, $p_{12}$, $p_{22}$) in the next generation are given by the allele frequencies in the current generation. Allele frequencies are denoted as $p_1$ and $p_2$, but when there are only two alleles at a locus, $p_2$ can be written as $1-p_1$, yielding the following equations for genotype frequencies.
+$$
+p_{11} = p_1^2
+$$
+$$
+p_{12} = 2p_1(1-p_1)
+$$
+$$
+p_{22} = (1-p_1)^2
+$$
 Let's consider the hybrid index and interclass heterozygosity of individuals at sites that are fixed for alternate alelles in the parental populations. When only considering fixed differences, it follows that hybrid index equates to the frequency of p1 alleles across the genome. Similarly, interclass heterozygosity equates to the frequency of p1p2 genotypes across the genomes.
+
 
 Based on the above formulas, we can calculate the hybrid index and interclass heterozygosity of any offspring given only the average allele frequency of p1 alleles in the parents. 
 
