@@ -11,13 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 # Under Construction
 
 # Introduction
-Triangle plots are a tool for visualizing genetic variation in hybrid zones and identifying hybrid classes present in the dataset. Triangle plots visualize hybrid index on the x-axis and interclass heterozygosity on the y-axis, and get their name because the possible space on the plot forms a triangle. Hybrid index refers to the proportions of parental ancestry in an individual, and interclass heterozygosity refers to the genomic sites with an allele from both parental groups. A number of discrete hybrid classes can be identified by their expected combination of hybrid index and interclass heterozygosity. The placement of parentals (P1, P2), first generation hybrids (F1s), later generation hybrids (F2s and later), and backcrosses (BC) on a triangle plot is shown below.
+Triangle plots are a tool for visualizing genetic variation in hybrid zones and identifying hybrid classes. Triangle plots visualize hybrid index on the x-axis and interclass heterozygosity on the y-axis, and get their name because the possible space on the plot forms a triangle. Hybrid index refers to the ancestry proportions of an individual, and interclass heterozygosity refers to the genomic sites with an allele from both parental groups. A number of discrete hybrid classes can be identified by their expected combination of hybrid index and interclass heterozygosity. The placement of parentals (P1, P2), first generation hybrids (F1s), later generation hybrids (F2s and later), and backcrosses (BC) on a triangle plot is shown below.
 
 ![](../man/figures/labeled_tri_plot.png)
 
-
-
-### Punnet Squares
 
 ### Hardy-Weinberg Equilibrium
 
@@ -31,7 +28,7 @@ $$
 $$
 p_{22} = (1-p_1)^2
 $$
-Let's consider the hybrid index and interclass heterozygosity of individuals at sites that are fixed for alternate alelles in the parental populations. When only considering fixed differences, it follows that hybrid index equates to the frequency of p1 alleles across the genome. Similarly, interclass heterozygosity equates to the frequency of p1p2 genotypes across the genomes.
+Let's consider the hybrid index and interclass heterozygosity of individuals at sites that are fixed for alternate alelles in the parental populations. When only considering fixed differences, it follows that hybrid index equates to the frequency of $p_1$ alleles across the genome. Similarly, interclass heterozygosity equates to the frequency of $p_{12}$ genotypes across the genome.
 
 When the parents have the same hybrid index, they can be thought of similarly as a population that is in HWE, and the above formulas can be used to calculate the hybrid index and interclass heterozygosity of offspring. For example,  let's consider a cross between two F1s. Both parents have a hybrid index of 0.5, which means the frequency of the $p_1$ allele across the genome is 0.5. Using only this information, we can calculate the genome-wide genotype frequencies of the offspring (F2s).
 
@@ -44,7 +41,7 @@ $$
 $$
 p_{22} = (1-0.5)^2 =0.25
 $$
-From the genotype frequencies of the offspring, we can obtain the frequency of the $p_1$ allele by dividing the frequency of $p_12$ genotype by $2$ (because the $p_1$ allele only occurs once in that genotype) and summing with the frequency of the $p_11$ genotype:
+From the genotype frequencies of the offspring, we can obtain the frequency of the $p_1$ allele by dividing the frequency of $p_{12}$ genotype by $2$ (because the $p_1$ allele only occurs once in that genotype) and summing with the frequency of the $p_11$ genotype:
 $$
 p_1 = 0.5(p_{12}) + p_{11} = 0.5(0.5) + 0.25 = 0.5
 $$
@@ -76,14 +73,16 @@ Based on the above formulas, we can calculate the hybrid index and interclass he
 </div>
 
 
-The dashed line on the above triangle plot denotes the expected hybrid index and interclass heterozygosity under HWE. As you may have noticed, hybrid offspring will never occur below the dashed curve on the triangle plot. Why is that? We can understand this by considering two cases of crosses. In the first case, the parents have the same hybrid index. When this is the case, offspring will occur on the dashed line by definition, because the parents are in HWE. In the second case, the parents have different hybrid indices. In this case, the hybrid index of offspring will be the same as for a cross between parents of the average $p_1$ allele frequency, because the genotype frequencies $p_{11}$ and $p_{22}$ will decrease by the same increment ($σ^2$), and changes in the $p_{12}$ genotype frequency don't change the hybrid index. However, the interclass heterozygosity will be higher than for a cross between parents of the average $p_1$ allele frequency, because the $p_{12}$ genotype frequency will increase by $σ^2$. Thus, hybrid offspring will always occur above the dashed curve. Of course, this is assuming the assumptions of HWE hold. When any of the assumptions of HWE are violated, such as if there is selection, drift, or inbreeding, it would be possible for individuals to occur below the dashed curve.
+The dashed curve on the above triangle plot denotes the expected hybrid index and interclass heterozygosity under HWE. As you may have noticed, hybrid offspring will never occur below the dashed curve on the triangle plot. Why is that? We can understand this by considering two cases of crosses. In the first case, the parents have the same hybrid index. When this is the case, offspring will occur on the dashed line by definition, because the parents are in HWE. In the second case, the parents have different hybrid indices. In this case, the hybrid index of offspring will be the same as for a cross between parents of the average $p_1$ allele frequency, because the genotype frequencies $p_{11}$ and $p_{22}$ will decrease by the same increment ($σ^2$), and changes in the $p_{12}$ genotype frequency don't change the hybrid index. However, the interclass heterozygosity will be higher than for a cross between parents of the average $p_1$ allele frequency, because the $p_{12}$ genotype frequency will increase by $σ^2$. Thus, hybrid offspring will always occur on or above the dashed curve. Of course, this is only if the assumptions of HWE hold. When any of the assumptions of HWE are violated, such as if there is selection, drift, or inbreeding, it would be possible for individuals to occur below the dashed curve.
 
-
+We can arrive at the same conclusions about the possible space on a triangle plot under HWE by simulating all possible matings through six generations, starting with only parental individuals. After the first generation, only parentals and F1s are present, shown in the first panel below. Each subsequent panel shows the hybrid offspring created by crossing all individuals present in the previous generation with every other individual.
 
 ![All offspring through six generations, after all possible matings in the previous generation occur](../man/figures/FigureS1.png)
 
-
+\vspace
 ### Triangle plots in practice
+
+Modern sequencing capabilities facilitate the generation of large SNP datasets
 
 When analyzing empirical genetic datasets, there are a number of factors that will influence the accuracy and precision of estimated hybrid indices and interclass heterozygosity (Wiens & Colella, 2024). 
 
@@ -104,8 +103,8 @@ When analyzing empirical genetic datasets, there are a number of factors that wi
 
 ### References
 Hahn, M.W. (2018). Molecular population genetics. Oxford University Press. Sinauer 
-&nbsp; &nbsp; &nbsp; &nbsp; Associates.\
+Associates.\
 Wiens, B.J., & Colella, J.P. (2024). triangulaR: an R package for identifying AIMs 
-&nbsp; &nbsp; &nbsp; &nbsp; and building triangle plots using SNP data from hybrid zones. bioRxiv, 2024.
+and building triangle plots using SNP data from hybrid zones. bioRxiv, 2024.
 
 
