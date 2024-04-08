@@ -210,17 +210,35 @@ possible matings in the previous generation occur</div>
 </h4>
 <p>SNP datasets generated through genomic sequencing (e.g. WGS, RADseq,
 target capture) of individuals from hybrid zones can be used to build
-triangle plots with the R package <em>triangulaR</em>. The method
-employeed here depends on the sampling of parental populations in order
-to identify ancestry-informative markers (AIMs). When analyzing
-empirical genetic datasets, there are a number of factors that will
-influence the accuracy and precision of estimated hybrid indices and
-interclass heterozygosity (Wiens &amp; Colella, 2024).</p>
-</div>
-<div class="section level4">
-<h4 id="try-changing-parameters-to-see-how-they-impact-hybrid-identification">Try changing parameters to see how they impact hybrid
-identification<a class="anchor" aria-label="anchor" href="#try-changing-parameters-to-see-how-they-impact-hybrid-identification"></a>
-</h4>
+triangle plots with the R package <a href="https://github.com/omys-omics/triangulaR" class="external-link"><em>triangulaR</em></a>.
+The method employeed here depends on the sampling of parental
+populations in order to identify ancestry-informative markers (AIMs).
+SNPs with a high allele frequency difference between the parental
+populations can be used as AIMs to calculate hybrid index and interclass
+heterozygosity.</p>
+<p>When analyzing empirical genetic datasets, there are a number of
+factors that will influence the accuracy and precision of estimated
+hybrid indices and interclass heterozygosity (Wiens &amp; Colella,
+2024). Some factors are out of our control, such as how divergent the
+parental populations are. Other factors we can control, such as how many
+parental individuals are sampled, how much of the genome is sequenced,
+and the allele frequency difference threshold used for identifying AIMs.
+The goal is to identify a large dataset of SNPs with high allele
+frequency differences between the parental populations. When divergence
+between parental populations is high, there will be many AIMs.
+Sequencing more of the genome (e.g. WGS instead of RADseq) will also
+provide more AIMs. Including more samples from the parental populations
+will increase the accuracy of estimated allele frequency differences,
+and thereby increase the accuracy of hybrid index and interclasss
+heterozygosity estimates. Lower allele frequency difference thresholds
+will increase the size of the AIM dataset, and allow comparisons to be
+made between the parental populations.</p>
+<p>These factors all interact to influence the placement of individuals
+on a triangle plot. In the interactive plot below, 20 individuals from
+four hybrid classes (F1, F2, backcrosses in both directions) are
+simulated and plotted based on the imput parameters. Try playing with
+the parameters to see how they impact identification of hybrid
+classes.</p>
 
 <div class="shiny-app-frame">
 <iframe src="https://omys-omics.shinyapps.io/Simulate_hybrid_parameters/" width="1000" height="1000">
@@ -230,11 +248,11 @@ identification<a class="anchor" aria-label="anchor" href="#try-changing-paramete
 <div class="section level4">
 <h4 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h4>
-<p>Hahn, M.W. (2018). Molecular population genetics. Oxford University
-Press. Sinauer Associates.<br>
-Wiens, B.J., &amp; Colella, J.P. (2024). triangulaR: an R package for
-identifying AIMs and building triangle plots using SNP data from hybrid
-zones. bioRxiv, 2024.</p>
+<p>Hahn, M.W. (2018). <em>Molecular population genetics</em>. Oxford
+University Press. Sinauer Associates.<br>
+Wiens, B.J., &amp; Colella, J.P. (2024). <em>triangulaR: an R package
+for identifying AIMs</em> <em>and building triangle plots using SNP data
+from hybrid zones</em>. bioRxiv, 2024.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
