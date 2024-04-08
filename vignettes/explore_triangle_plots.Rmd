@@ -101,6 +101,6 @@ When analyzing empirical genetic datasets, there are a number of factors that wi
 ### References
 Hahn, M.W. (2018). Molecular population genetics. Oxford University Press. Sinauer Associates.
 Wiens, B.J., & Colella, J.P. (2024). triangulaR: an R package for identifying AIMs 
-\phantom{xxxx}and building triangle plots using SNP data from hybrid zones. bioRxiv, 2024.
+\phantom{xxxx}\hspace{3ex}and building triangle plots using SNP data from hybrid zones. bioRxiv, 2024.
 
 
