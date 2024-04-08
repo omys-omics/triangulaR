@@ -82,8 +82,7 @@ We can arrive at the same conclusions about the possible space on a triangle plo
 \vspace
 ### Triangle plots in practice
 
-Modern sequencing capabilities facilitate the generation of large SNP datasets
-
+SNP datasets generated through genomic sequencing (e.g. WGS, RADseq, target capture) of individuals from hybrid zones can be used to build triangle plots with the R package *triangulaR*. The method employeed here depends on the sampling of parental populations in order to identify ancestry-informative markers (AIMs). 
 When analyzing empirical genetic datasets, there are a number of factors that will influence the accuracy and precision of estimated hybrid indices and interclass heterozygosity (Wiens & Colella, 2024). 
 
 
