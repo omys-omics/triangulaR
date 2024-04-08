@@ -79,7 +79,7 @@ We can arrive at the same conclusions about the possible space on a triangle plo
 
 ![All offspring through six generations, after all possible matings in the previous generation occur](../man/figures/FigureS1.png)
 
-\vspace
+</br>
 ### Triangle plots in practice
 
 SNP datasets generated through genomic sequencing (e.g. WGS, RADseq, target capture) of individuals from hybrid zones can be used to build triangle plots with the R package [*triangulaR*](https://github.com/omys-omics/triangulaR). The method employeed here depends on the sampling of parental populations in order to identify ancestry-informative markers (AIMs). SNPs with a high allele frequency difference between the parental populations can be used as AIMs to calculate hybrid index and interclass heterozygosity. 
