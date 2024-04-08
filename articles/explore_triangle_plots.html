@@ -87,22 +87,17 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>Triangle plots are a tool for visualizing genetic variation in hybrid
-zones and identifying hybrid classes present in the dataset. Triangle
-plots visualize hybrid index on the x-axis and interclass heterozygosity
-on the y-axis, and get their name because the possible space on the plot
-forms a triangle. Hybrid index refers to the proportions of parental
-ancestry in an individual, and interclass heterozygosity refers to the
-genomic sites with an allele from both parental groups. A number of
-discrete hybrid classes can be identified by their expected combination
-of hybrid index and interclass heterozygosity. The placement of
-parentals (P1, P2), first generation hybrids (F1s), later generation
-hybrids (F2s and later), and backcrosses (BC) on a triangle plot is
-shown below.</p>
+zones and identifying hybrid classes. Triangle plots visualize hybrid
+index on the x-axis and interclass heterozygosity on the y-axis, and get
+their name because the possible space on the plot forms a triangle.
+Hybrid index refers to the ancestry proportions of an individual, and
+interclass heterozygosity refers to the genomic sites with an allele
+from both parental groups. A number of discrete hybrid classes can be
+identified by their expected combination of hybrid index and interclass
+heterozygosity. The placement of parentals (P1, P2), first generation
+hybrids (F1s), later generation hybrids (F2s and later), and backcrosses
+(BC) on a triangle plot is shown below.</p>
 <p><img src="../reference/figures/labeled_tri_plot.png"></p>
-<div class="section level4">
-<h4 id="punnet-squares">Punnet Squares<a class="anchor" aria-label="anchor" href="#punnet-squares"></a>
-</h4>
-</div>
 <div class="section level4">
 <h4 id="hardy-weinberg-equilibrium">Hardy-Weinberg Equilibrium<a class="anchor" aria-label="anchor" href="#hardy-weinberg-equilibrium"></a>
 </h4>
@@ -121,9 +116,8 @@ p_{22} = (1-p_1)^2
 \]</span> Let’s consider the hybrid index and interclass heterozygosity
 of individuals at sites that are fixed for alternate alelles in the
 parental populations. When only considering fixed differences, it
-follows that hybrid index equates to the frequency of p1 alleles across
-the genome. Similarly, interclass heterozygosity equates to the
-frequency of p1p2 genotypes across the genomes.</p>
+follows that hybrid index equates to the frequency of <span class="math inline">\(p_1\)</span> alleles across the genome. Similarly,
+interclass heterozygosity equates to the frequency of <span class="math inline">\(p_{12}\)</span> genotypes across the genome.</p>
 <p>When the parents have the same hybrid index, they can be thought of
 similarly as a population that is in HWE, and the above formulas can be
 used to calculate the hybrid index and interclass heterozygosity of
@@ -140,7 +134,7 @@ p_{12} = 2(0.5)(1-0.5) = 0.5
 p_{22} = (1-0.5)^2 =0.25
 \]</span> From the genotype frequencies of the offspring, we can obtain
 the frequency of the <span class="math inline">\(p_1\)</span> allele by
-dividing the frequency of <span class="math inline">\(p_12\)</span>
+dividing the frequency of <span class="math inline">\(p_{12}\)</span>
 genotype by <span class="math inline">\(2\)</span> (because the <span class="math inline">\(p_1\)</span> allele only occurs once in that
 genotype) and summing with the frequency of the <span class="math inline">\(p_11\)</span> genotype: <span class="math display">\[
 p_1 = 0.5(p_{12}) + p_{11} = 0.5(0.5) + 0.25 = 0.5
@@ -178,7 +172,7 @@ offspring would occur on a triangle plot:</p>
 <iframe src="https://omys-omics.shinyapps.io/Hybrid_Offspring/" width="1000" height="550">
 </iframe>
 </div>
-<p>The dashed line on the above triangle plot denotes the expected
+<p>The dashed curve on the above triangle plot denotes the expected
 hybrid index and interclass heterozygosity under HWE. As you may have
 noticed, hybrid offspring will never occur below the dashed curve on the
 triangle plot. Why is that? We can understand this by considering two
@@ -195,10 +189,17 @@ increment (<span class="math inline">\(σ^2\)</span>), and changes in the
 change the hybrid index. However, the interclass heterozygosity will be
 higher than for a cross between parents of the average <span class="math inline">\(p_1\)</span> allele frequency, because the <span class="math inline">\(p_{12}\)</span> genotype frequency will increase
 by <span class="math inline">\(σ^2\)</span>. Thus, hybrid offspring will
-always occur above the dashed curve. Of course, this is assuming the
-assumptions of HWE hold. When any of the assumptions of HWE are
+always occur on or above the dashed curve. Of course, this is only if
+the assumptions of HWE hold. When any of the assumptions of HWE are
 violated, such as if there is selection, drift, or inbreeding, it would
 be possible for individuals to occur below the dashed curve.</p>
+<p>We can arrive at the same conclusions about the possible space on a
+triangle plot under HWE by simulating all possible matings through six
+generations, starting with only parental individuals. After the first
+generation, only parentals and F1s are present, shown in the first panel
+below. Each subsequent panel shows the hybrid offspring created by
+crossing all individuals present in the previous generation with every
+other individual.</p>
 <div class="float">
 <img src="../reference/figures/FigureS1.png" alt="All offspring through six generations, after all possible matings in the previous generation occur"><div class="figcaption">All offspring through six generations, after all
 possible matings in the previous generation occur</div>
@@ -207,6 +208,8 @@ possible matings in the previous generation occur</div>
 <div class="section level4">
 <h4 id="triangle-plots-in-practice">Triangle plots in practice<a class="anchor" aria-label="anchor" href="#triangle-plots-in-practice"></a>
 </h4>
+<p>Modern sequencing capabilities facilitate the generation of large SNP
+datasets</p>
 <p>When analyzing empirical genetic datasets, there are a number of
 factors that will influence the accuracy and precision of estimated
 hybrid indices and interclass heterozygosity (Wiens &amp; Colella,
@@ -226,10 +229,10 @@ identification<a class="anchor" aria-label="anchor" href="#try-changing-paramete
 <h4 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h4>
 <p>Hahn, M.W. (2018). Molecular population genetics. Oxford University
-Press. Sinauer         Associates.<br>
+Press. Sinauer Associates.<br>
 Wiens, B.J., &amp; Colella, J.P. (2024). triangulaR: an R package for
-identifying AIMs         and building triangle plots using SNP data from
-hybrid zones. bioRxiv, 2024.</p>
+identifying AIMs and building triangle plots using SNP data from hybrid
+zones. bioRxiv, 2024.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
