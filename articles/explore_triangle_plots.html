@@ -128,8 +128,7 @@ p_{22} = (1-0.5)^2 =0.25
 \]</span> From the genotype frequencies of the offspring, we can obtain
 the frequency of the <span class="math inline">\(p_1\)</span> allele by
 dividing the frequency of <span class="math inline">\(p_12\)</span>
-genotype by <span class="math inline">\(2\)</span> (because the and the
-<span class="math inline">\(p_1\)</span> allele only occurs once in that
+genotype by <span class="math inline">\(2\)</span> (because the <span class="math inline">\(p_1\)</span> allele only occurs once in that
 genotype) and summing with the frequency of the <span class="math inline">\(p_11\)</span> genotype: <span class="math display">\[
 p_1 = 0.5(p_{12}) + p_{11} = 0.5(0.5) + 0.25 = 0.5
 \]</span> Therefore, we obtain the expected hybrid index (0.5, frequency
@@ -144,12 +143,48 @@ between the two parents. This is done by calculating the variance (<span class="
 σ^2 = \frac{Σ (p_{1i} − \overline{p_1})^2} {N}
 \]</span> where <span class="math inline">\(p_{1i}\)</span> is the
 frequency of the <span class="math inline">\(p_1\)</span> allele in the
-<span class="math inline">\(ith\)</span> parent and <span class="math inline">\(\overline{p_1}\)</span> is the avereage frequency
+<span class="math inline">\(ith\)</span> parent and <span class="math inline">\(\overline{p_1}\)</span> is the average frequency
 of the <span class="math inline">\(p_1\)</span> allele in the parents
-(Hahn, 2018).</p>
+(Hahn, 2018). Genotype frequencies of offspring are then calculated as:
+<span class="math display">\[
+p_{11} = \overline{p_1}^2 - σ^2
+\]</span> <span class="math display">\[
+p_{12} = 2\overline{p_1}(1-\overline{p_1}) + 2σ^2
+\]</span> <span class="math display">\[
+p_{22} = (1-\overline{p_1})^2 - σ^2
+\]</span></p>
 <p>Based on the above formulas, we can calculate the hybrid index and
 interclass heterozygosity of any offspring given only the average allele
-frequency of p1 alleles in the parents.</p>
+frequency of p1 alleles in the parents. Try it out for yourself by
+adjusting the hybrid index and interclass heterozygosity of the parents,
+and seeing where the hybrid offspring would occur on a triangle
+plot:</p>
+
+<div class="shiny-app-frame">
+<iframe src="https://omys-omics.shinyapps.io/Hybrid_Offspring/" width="1000" height="1000">
+</iframe>
+</div>
+<p>The dashed line on the above triangle plot denotes the expected
+hybrid index and interclass heterozygosity under HWE. As you may have
+noticed, hybrid offspring will never occur below the dashed curve on the
+triangle plot. Why is that? We can understand this by considering two
+cases of crosses. In the first case, the parents have the same hybrid
+index. When this is the case, offspring will occur on the dashed line by
+definition, because the parents are in HWE. In the second case, the
+parents have different hybrid indices. In this case, the hybrid index of
+offspring will be the same as for a cross between parents of the average
+<span class="math inline">\(p_1\)</span> allele frequency, because the
+genotype frequencies <span class="math inline">\(p_{11}\)</span> and
+<span class="math inline">\(p_{22}\)</span> will decrease by the same
+increment (<span class="math inline">\(σ^2\)</span>), and changes in the
+<span class="math inline">\(p_{12}\)</span> genotype frequency don’t
+change the hybrid index. However, the interclass heterozygosity will be
+higher than for a cross between parents of the average <span class="math inline">\(p_1\)</span> allele frequency, because the <span class="math inline">\(p_{12}\)</span> genotype frequency will increase
+by <span class="math inline">\(σ^2\)</span>. Thus, hybrid offspring will
+always occur above the dashed curve. Of course, this is assuming the
+assumptions of HWE hold. When any of the assumptions of HWE are
+violated, such as if there is selection, drift, or inbreeding, it would
+be possible for individuals to occur below the dashed curve.</p>
 <div class="float">
 <img src="../reference/figures/FigureS1.png" alt="All offspring through six generations, after all possible matings in the previous generation occur"><div class="figcaption">All offspring through six generations, after all
 possible matings in the previous generation occur</div>
@@ -158,14 +193,6 @@ possible matings in the previous generation occur</div>
 <div class="section level4">
 <h4 id="try-it-out">Try it out<a class="anchor" aria-label="anchor" href="#try-it-out"></a>
 </h4>
-<p>Example with simulated data: 1. See distribution of allele frequency
-differences 2. Get names of AIMs 3. Try multiple thresholds and get
-vcfRs 4. Calculate HI and HET 5. Compare triangle plots</p>
-
-<div class="shiny-app-frame">
-<iframe src="https://omys-omics.shinyapps.io/Hybrid_Offspring/" width="1000" height="1000">
-</iframe>
-</div>
 <p>Example with real data: 1. See distribution of allele frequency
 differences 2. Try multiple thresholds and get vcfRs 3. Calculate HI and
 HET 4. Compare triangle plots 5. Color by missing data</p>
@@ -176,7 +203,7 @@ identification<a class="anchor" aria-label="anchor" href="#try-changing-paramete
 </h4>
 
 <div class="shiny-app-frame">
-<iframe src="https://omys-omics.shinyapps.io/Simulate_hybrid_parameters/" width="1000" height="1200">
+<iframe src="https://omys-omics.shinyapps.io/Simulate_hybrid_parameters/" width="1000" height="1100">
 </iframe>
 </div>
 </div>
