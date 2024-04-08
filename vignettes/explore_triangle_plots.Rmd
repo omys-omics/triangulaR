@@ -11,7 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 # Under Construction
 
 # Introduction
-Triangle plots are a tool for visualizing ...
+Triangle plots are a tool for visualizing genetic variation in hybrid zones and identifying hybrid classes present in the dataset. Triangle plots visualize hybrid index on the x-axis and interclass heterozygosity on the y-axis, and get their name because the possible space on the plot forms a triangle. Hybrid index refers to the proportions of parental ancestry in an individual, and interclass heterozygosity refers to the genomic sites with an allele from both parental groups. 
+
+
 
 ### Punnet Squares
 
@@ -99,9 +101,9 @@ When analyzing empirical genetic datasets, there are a number of factors that wi
 
 
 ### References
-Hahn, M.W. (2018). Molecular population genetics. Oxford University Press. Sinauer Associates.
+Hahn, M.W. (2018). Molecular population genetics. Oxford University Press. Sinauer 
+&nbsp; &nbsp; &nbsp; &nbsp; Associates.\
 Wiens, B.J., & Colella, J.P. (2024). triangulaR: an R package for identifying AIMs 
-\phantom{xxxx}\hspace{3ex}and building triangle plots using SNP data from hybrid zones. bioRxiv, 2024.
+&nbsp; &nbsp; &nbsp; &nbsp; and building triangle plots using SNP data from hybrid zones. bioRxiv, 2024.
 
-&nbsp; &nbsp; &nbsp; &nbsp; test
 
