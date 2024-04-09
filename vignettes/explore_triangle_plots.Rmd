@@ -39,7 +39,7 @@ $$
 $$
 p_{22} = (1-0.5)^2 =0.25
 $$
-From the genotype frequencies of the offspring, we can obtain the frequency of the $p_1$ allele by dividing the frequency of $p_{12}$ genotype by $2$ (because the $p_1$ allele only occurs once in that genotype) and summing with the frequency of the $p_11$ genotype:
+From the genotype frequencies of the offspring, we can obtain the frequency of the $p_1$ allele by dividing the frequency of $p_{12}$ genotype by $2$ (because the $p_1$ allele only occurs once in that genotype) and summing with the frequency of the $p_{11}$ genotype:
 $$
 p_1 = 0.5(p_{12}) + p_{11} = 0.5(0.5) + 0.25 = 0.5
 $$
