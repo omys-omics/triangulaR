@@ -12,3 +12,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Identifying AIMs
 
 ![](../man/figures/parental_pops.png)
+
+
+
+### Calculating Hybrid Index and Interclass Heterozygosity
+
+
+![](../man/figures/first_cross.png){width=100}
+
+
+### Punnett Squares
+
+
+### Borders of Triangle Plot
