@@ -26,22 +26,21 @@ $$\\[0.05in]$$
 <img src="../man/figures/second_cross.png" align="left" alt="" width="260" /> Let's consider another type of cross. The illustration to the left shows the offspring of a cross between two F1s, called an F2. We can calculate hybrid index and interclass heterozygosity for the F2 manually as we did above. In the F2, we see there are four alleles from parental population 2 (blue), so hybrid index is $\frac{4}{8}=0.5$. In contrast to the F1 though, the F2 only has two AIMs with alleles from both parental populations, so interclass heterozygosity is $\frac{2}{4}=0.5$. These are the expected values for an F2, as we will see in the next section.
 $$\\[0.1in]$$
 
-### Punnett Squares
+### Punnett Squares <img src="../man/figures/punnett_squares.png" align="right" alt="" width="280" /> 
 
 
-<img src="../man/figures/punnett_squares.png" align="right" alt="" width="280" /> Another way to think about the expected genotypes in hybrid offspring is with Punnett squares. The Punnett square on the top shows the possible genotypes at an AIM in an F1. Because the parents are homozygous for different alleles, the only possible genotype is $p_{12}$. Since the parents have the same genotype at all AIMs, F1s will have the $p_{12}$ genotype at all AIMs.
+Another way to think about the expected genotypes in hybrid offspring is with Punnett squares. The Punnett square on the top shows the possible genotypes at an AIM in an F1. Because the parents are homozygous for different alleles, the only possible genotype is $p_{12}$. Since the parents have the same genotype at all AIMs, F1s will have the $p_{12}$ genotype at all AIMs.
 
 Now let's look at a Punnett square for a cross between two F1s. We see that for any given AIM, there are three possible genotypes in an F2. There is a 25% chance of the $p_{11}$ genotype, a 50% chance of the $p_{12}$ genotype, and a 25% chance of the $p_{22}$ genotype. At any given AIM, the F2 can only have one genotype, but if we had a dataset of 100 AIMs, we would expect that 25 would display the $p_{11}$ genotype, 50 would display the $p_{12}$ genotype, and 25 would display $p_{22}$ genotype.
 
 
-### Borders of Triangle Plot
-<img src="../man/figures/labeled_tri_plot.png" align="left" alt="" width="400" /> So, after seeing how hybrid index and interclass heterozygosity are calculated, let's see where individuals appear on a triangle plot. On the plot to the left, we can see that F1s and F2s both have a hybrid index of 0.5, but can be distinguished because F1s have an interclass heterozygosity of 1. BC on the plot stands for "backcross". A backcross is when a hybrid crosses with parental individual. BC1 indicates the offspring of a cross between an F1 and a member of parental population 1 (P1). BC2 indicates a cross between BC1 and P1, and so forth. 
-
-The solid black lines forming a triangle indicate the possible space on the plot. All individuals must be either on the lines or within the triangle. This is because hybrid index and interclass heterozygosity are not fully independent of each other. To see why, let's consider an example. 
+### Borders of a Triangle Plot
+<img src="../man/figures/labeled_tri_plot.png" align="left" alt="" width="400" /> So, after seeing how hybrid index and interclass heterozygosity are calculated, let's see where individuals appear on a triangle plot. On the plot to the left, we can see that F1s and F2s both have a hybrid index of 0.5, but can be distinguished because F1s have an interclass heterozygosity of 1. BC on the plot stands for "backcross". A backcross is when a hybrid crosses with parental individual. BC1 indicates the offspring of a cross between an F1 and a member of parental population 1 (P1). BC2 indicates a cross between BC1 and P1, and so forth. The solid black lines forming a triangle indicate the possible space on the plot. All individuals must be either on the lines or within the triangle. This is because hybrid index and interclass heterozygosity are not fully independent of each other. To see why, let's consider the example below. 
 
 
 ![](../man/figures/possible_space.png)
 
+The triangle plots above show a invalid (left) and valid (right) combination of hybrid index and interclass heterozygosity. Let's say we used 100 AIMs to calculate hybrid index and interclass heterozygosity. To see why the gray point with the red X next to it is not possible, let's consider the implications of its interclass heterozygosity. An interclass heterozygosity of 0.6 means that of the 100 AIMs, 60 of them are heterozygous, or have a genotype of $p_{12}$. So, we know there are a minimum of 30 $p_2$ alleles. Thus, even if the genotype at every other AIM is $p_{11}$, there are still 30 $p_2$ alleles, meaning the hybrid index is $\frac{30}{100}=0.3$. So, the combination of a hybrid index of 0.25 and interclass heterozygosity of 0.6 is impossible, because a hybrid index of 0.25 means there can be at most 25 $p_2$ alleles but an interclass heterozygosity of 0.6 means there must be at least 30 $p_2$ alleles.
 
 
 
