@@ -1,19 +1,26 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# triangulaR <img src="man/figures/hex_logo.png" align="right" alt="" width="153" />
+# *triangulaR* <img src="man/figures/hex_logo.png" align="right" alt="" width="170" />
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-triangulaR is a package for identifying ancestry-informative markers
+*triangulaR* is a package for identifying ancestry-informative markers
 (AIMS), calculating hybrid indices, interclass heterozygosity, and
-building triangle plots
+building triangle plots. Check out the articles at the [package
+website](https://omys-omics.github.io/triangulaR/articles/explore_triangle_plots.html)
+for background on triangle plots, or stay here for a quick start on how
+to use the package.
+
+  
+![\\\\\[0.15in\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%5C%5B0.15in%5D
+"\\\\[0.15in]")  
 
 ## Installation
 
-You can install the development version of triangulaR from
+You can install the development version of *triangulaR* from
 [GitHub](https://github.com/omys-omics/triangulaR) with:
 
 ``` r
@@ -23,13 +30,13 @@ devtools::install_github("omys-omics/triangulaR")
 
 ## Citation
 
-If you publish any work that uses triangulaR, please consider citing the
-following paper (currently available as a preprint):
+If you publish any work that uses *triangulaR*, please consider citing
+the following paper (currently available as a preprint):
 <https://www.biorxiv.org/content/10.1101/2024.03.28.587167v1>
 
 ## How to use this package:
 
-triangulaR builds on the functionality of
+*triangulaR* builds on the functionality of
 [vcfR](https://knausb.github.io/vcfR_documentation/) to analyze SNP data
 in R. The first step is to read in the data from a vcf file.
 

@@ -13,20 +13,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-# triangulaR <img src="man/figures/hex_logo.png" align="right" alt="" width="153" />
+# *triangulaR* <img src="man/figures/hex_logo.png" align="right" alt="" width="153" />
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-triangulaR is a package for identifying ancestry-informative markers (AIMS), calculating hybrid indices, interclass heterozygosity, and building triangle plots
+*triangulaR* is a package for identifying ancestry-informative markers (AIMS), calculating hybrid indices, interclass heterozygosity, and building triangle plots
 
-\n
-\n
-\n
+$$\\[0.15in]$$
 
 ## Installation
 
-You can install the development version of triangulaR from [GitHub](https://github.com/omys-omics/triangulaR) with:
+You can install the development version of *triangulaR* from [GitHub](https://github.com/omys-omics/triangulaR) with:
 
 ``` r
 # install.packages("devtools")
@@ -35,13 +33,13 @@ devtools::install_github("omys-omics/triangulaR")
 
 ## Citation
 
-If you publish any work that uses triangulaR, please consider citing the following paper (currently available as a preprint):
+If you publish any work that uses *triangulaR*, please consider citing the following paper (currently available as a preprint):
 https://www.biorxiv.org/content/10.1101/2024.03.28.587167v1
 
 
 ## How to use this package:
 
-triangulaR builds on the functionality of [vcfR](https://knausb.github.io/vcfR_documentation/) to analyze SNP data in R. The first step is to read in the data from a vcf file.
+*triangulaR* builds on the functionality of [vcfR](https://knausb.github.io/vcfR_documentation/) to analyze SNP data in R. The first step is to read in the data from a vcf file.
 
 #### Step 1: Read in data
 It is expected that the data have already filtered for quality (e.g. setting genotype quality and depth thresholds, removing individuals and sites with high missing data, etc.). For help with this step, see [SNPfiltR](https://github.com/DevonDeRaad/SNPfiltR).
