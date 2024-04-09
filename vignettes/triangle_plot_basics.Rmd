@@ -1,0 +1,14 @@
+---
+title: "triangle_plot_basics"
+author: "Ben Wiens"
+date: "4/9/2024"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Identifying AIMs
+
+![](../man/figures/parental_pops.png)
