@@ -12,7 +12,7 @@
 building triangle plots. Check out the articles at the [package
 website](https://omys-omics.github.io/triangulaR/articles/explore_triangle_plots.html)
 for background on triangle plots, or stay here for a quick start on how
-to use the package. fd
+to use the package.
 
   
 ![\\\\\[0.15in\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%5C%5B0.15in%5D
