@@ -1,5 +1,5 @@
 ---
-title: "triangle_plot_basics"
+title: "Triangle Plot Basics"
 author: "Ben Wiens"
 date: "4/9/2024"
 output: html_document

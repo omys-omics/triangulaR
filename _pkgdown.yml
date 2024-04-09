@@ -2,3 +2,9 @@ url: https://omys-omics.github.io/triangulaR/
 template:
   bootstrap: 5
 
+articles:
+- title: Articles
+  navbar: ~
+  contents:
+  - triangle_plot_basics
+  - explore_triangle_plots
