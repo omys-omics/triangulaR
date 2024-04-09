@@ -27,10 +27,11 @@ $$\\[0.05in]$$
 $$\\[0.1in]$$
 
 ### Punnett Squares
-
+$$\\[0.1in]$$
 
 <img src="../man/figures/punnett_squares.png" align="left" alt="" width="280" /> Another way to think about the expected genotypes in hybrid offspring is with Punnett squares. The Punnett square on the top shows the possible genotypes at an AIM in an F1. Because the parents are homozygous for different alleles, the only possible genotype is $p_{12}$. Since the parents have the same genotype at all AIMs, F1s will have the $p_{12}$ genotype at all AIMs.
 
+Now let's look at a Punnett square for a cross between two F1s. We see that for any given AIM, there are three possible genotypes in an F2. There is a 25% chance of the $p_{11}$ genotype, a 50% chance of the $p_{12}$ genotype, and a 25% chance of the $p_{22}$ genotype. At any given AIM, the F2 can only have one genotype, but if we had a dataset of 100 AIMs, we would expect that 25 would display the $p_{11}$ genotype, 50 would display the $p_{12}$ genotype, and 25 would display $p_{22}$ genotype.
 
 
 ### Borders of Triangle Plot
