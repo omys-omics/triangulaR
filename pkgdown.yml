@@ -3,7 +3,8 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   explore_triangle_plots: explore_triangle_plots.html
-last_built: 2024-04-09T01:16Z
+  triangle_plot_basics: triangle_plot_basics.html
+last_built: 2024-04-09T13:58Z
 urls:
   reference: https://omys-omics.github.io/triangulaR/reference
   article: https://omys-omics.github.io/triangulaR/articles
