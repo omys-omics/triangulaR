@@ -35,7 +35,9 @@ Now let's look at a Punnett square for a cross between two F1s. We see that for 
 
 
 ### Borders of Triangle Plot
-<img src="../man/figures/labeled_tri_plot.png" align="left" alt="" width="320" /> fwqjeoifa klfjasdlk fja sdlkf jasdlkf jas dlk fjasd kof jsdkfvnasdjfvnas dkjvnadsjvn asdkjvna skjdvnads asdjvaksdo vjasdopkv ja sdokv ajsdvok adsjvkodsaj vokadsvj adskopvjadskov koadsv wqjeoifa klfjasdlk fja sdlkf jasdlkf jas dlk fjasd kof jsdkfvnasdjfvnas dkjvnadsjvn asdkjvna skjdvnads asdjvaksdo vjasdopkv ja sdokv ajsdvok adsjvkodsaj vokadsvj adskopvjadskov koadsv wqjeoifa klfjasdlk fja sdlkf jasdlkf jas dlk fjasd kof jsdkfvnasdjfvnas dkjvnadsjvn asdkjvna skjdvnads asdjvaksdo vjasdopkv ja sdokv ajsdvok adsjvkodsaj vokadsvj adskopvjadskov koadsv wqjeoifa klfjasdlk fja sdlkf jasdlkf jas dlk fjasd kof jsdkfvnasdjfvnas dkjvnadsjvn asdkjvna skjdvnads asdjvaksdo vjasdopkv ja sdokv ajsdvok adsjvkodsaj vokadsvj adskopvjadskov koadsv
+<img src="../man/figures/labeled_tri_plot.png" align="left" alt="" width="400" /> So, after seeing how hybrid index and interclass heterozygosity are calculated, let's see where individuals appear on a triangle plot. On the plot to the left, we can see that F1s and F2s both have a hybrid index of 0.5, but can be distinguished because F1s have an interclass heterozygosity of 1. BC on the plot stands for "backcross". A backcross is when a hybrid crosses with parental individual. BC1 indicates the offspring of a cross between an F1 and a member of parental population 1 (P1). BC2 indicates a cross between BC1 and P1, and so forth. 
+
+The solid black lines forming a triangle indicate the possible space on the plot. All individuals must be either on the lines or within the triangle. This is because hybrid index and interclass heterozygosity are not fully independent of each other. To see why, let's consider an example. 
 
 
 ![](../man/figures/possible_space.png)
