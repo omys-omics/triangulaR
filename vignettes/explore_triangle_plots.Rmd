@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Introduction
 Triangle plots are a tool for visualizing genetic variation in hybrid zones and identifying hybrid classes. Triangle plots visualize hybrid index on the x-axis and interclass heterozygosity on the y-axis, and get their name because the possible space on the plot forms a triangle. Hybrid index refers to the ancestry proportions of an individual, and interclass heterozygosity refers to the genomic sites with an allele from both parental groups. A number of discrete hybrid classes can be identified by their expected combination of hybrid index and interclass heterozygosity. The placement of parentals (P1, P2), first generation hybrids (F1s), later generation hybrids (F2s and later), and backcrosses (BC) on a triangle plot is shown below.
 
-![](../man/figures/labeled_tri_plot.png){width=60%}
+![](../man/figures/labeled_tri_plot.png)
 $$\\[0.15in]$$
 
 ### Hardy-Weinberg Equilibrium
