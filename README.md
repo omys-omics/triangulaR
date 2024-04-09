@@ -14,10 +14,6 @@ website](https://omys-omics.github.io/triangulaR/articles/explore_triangle_plots
 for background on triangle plots, or stay here for a quick start on how
 to use the package.
 
-  
-![\\\\\[0.06in\]](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5C%5C%5B0.06in%5D
-"\\\\[0.06in]")  
-
 ## Installation
 
 You can install the development version of *triangulaR* from
