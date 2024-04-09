@@ -10,9 +10,9 @@
 *triangulaR* is a package for identifying ancestry-informative markers
 (AIMS), calculating hybrid indices, interclass heterozygosity, and
 building triangle plots. Check out the articles at the [package
-website](https://omys-omics.github.io/triangulaR/articles/explore_triangle_plots.html)
-for background on triangle plots, or stay here for a quick start on how
-to use the package.
+website](https://omys-omics.github.io/triangulaR/index.html) for
+background on triangle plots, or stay here for a quick start on how to
+use the package.
 
 ## Installation
 
