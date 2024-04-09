@@ -18,8 +18,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ### Calculating Hybrid Index and Interclass Heterozygosity
 
 
-![](../man/figures/first_cross.png){width=100}
+![](../man/figures/first_cross.png){width=400}
+$$\\[0.1in]$$
 
+![](../man/figures/second_cross.png){width=400}
+$$\\[0.1in]$$
 
 ### Punnett Squares
 
