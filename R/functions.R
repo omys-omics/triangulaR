@@ -390,6 +390,7 @@ aimFreqDist <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference
 #' @param data Dataframe returned from hybridIndex function
 #' @param colors (character) Colors to use for each population. Optional, if not supplied, default colors will be generated
 #' @param outline (logical) Whether or not to draw possible triangle space as outline
+#' @param ind.labels (logical) Whether or not to label each individual on the triangle plot
 #' @param cex (character) Size of points
 #' @param alpha (numeric) Transparency of points
 #' @param jitter (numeric) Amount by which to jitter points on plot (to facilitate visualization)
@@ -399,10 +400,11 @@ aimFreqDist <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference
 #'
 #' @import ggplot2
 #' @importFrom grDevices colorRampPalette
+#' @importFrom ggrepel geom_label_repel
 #'
 #' @examples
 #' #triangle.plot(data = your.data, colors = your.colors)
-triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alpha = 1, jitter = 0) {
+triangle.plot <- function(data = NULL, colors = NULL, outline = T, ind.labels = F, cex = 2, alpha = 1, jitter = 0) {
   if(is.null(colors)) {
     color_ramp <- colorRampPalette(c("orange", "blue", "green", "red1", "yellow", "purple"))
     colors <- color_ramp(length(unique(data$pop)))
@@ -435,16 +437,20 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
       xlim(c(-0.05,1.05)) +
       theme_classic()
   }
+  if(ind.labels) {
+    p <- p + geom_label_repel(aes(label=id), size=2)
+  }
   return(p)
 }
 
 
 #' missing.plot
 #'
-#' Color the triangle plot by perecent missing data in each sample
+#' Color the triangle plot by percent missing data in each sample
 #'
 #' @param data Dataframe returned from hybridIndex function
 #' @param outline (logical) Whether or not to draw possible triangle space as outline
+#' @param ind.labels (logical) Whether or not to label each individual on the triangle plot
 #' @param cex (character) Size of points
 #' @param alpha (numeric) Transparency of points
 #' @param jitter (numeric) Amount by which to jitter points on plot (to facilitate visualization)
@@ -453,10 +459,11 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, cex = 2, alph
 #' @export
 #'
 #' @import ggplot2
+#' @importFrom ggrepel geom_label_repel
 #'
 #' @examples
 #' #missing.plot(data = your.data)
-missing.plot <- function(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 0) {
+missing.plot <- function(data = NULL, outline = T, ind.labels = F, cex = 2, alpha = 1, jitter = 0) {
   if(outline) {
     p <- ggplot(data, aes(x=hybrid.index, y=heterozygosity, color=perc.missing)) +
       geom_segment(aes(x = 0.5, xend = 1, y = 1, yend = 0), color = "black") +
@@ -482,6 +489,9 @@ missing.plot <- function(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 
       ylim(c(-0.05,1.05)) +
       xlim(c(-0.05,1.05)) +
       theme_classic()
+  }
+  if(ind.labels) {
+    p <- p + geom_label_repel(aes(label=id), size=2)
   }
   return(p)
 }
