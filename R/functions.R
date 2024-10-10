@@ -394,6 +394,7 @@ aimFreqDist <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference
 #' @param cex (character) Size of points
 #' @param alpha (numeric) Transparency of points
 #' @param jitter (numeric) Amount by which to jitter points on plot (to facilitate visualization)
+#' @param max.overlaps (numeric) Only necessary if labeling individuals. Increasing this will increase the number of individuals labeled, even if labels overlap.
 #'
 #' @return ggplot2 object
 #' @export
@@ -404,7 +405,7 @@ aimFreqDist <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, difference
 #'
 #' @examples
 #' #triangle.plot(data = your.data, colors = your.colors)
-triangle.plot <- function(data = NULL, colors = NULL, outline = T, ind.labels = F, cex = 2, alpha = 1, jitter = 0) {
+triangle.plot <- function(data = NULL, colors = NULL, outline = T, ind.labels = F, cex = 2, alpha = 1, jitter = 0, max.overlaps = 10) {
   if(is.null(colors)) {
     color_ramp <- colorRampPalette(c("orange", "blue", "green", "red1", "yellow", "purple"))
     colors <- color_ramp(length(unique(data$pop)))
@@ -438,7 +439,7 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, ind.labels = 
       theme_classic()
   }
   if(ind.labels) {
-    p <- p + geom_label_repel(aes(label=id), size=2)
+    p <- p + geom_label_repel(aes(label=id), size=2, max.overlaps = max.overlaps)
   }
   return(p)
 }
@@ -454,7 +455,8 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, ind.labels = 
 #' @param cex (character) Size of points
 #' @param alpha (numeric) Transparency of points
 #' @param jitter (numeric) Amount by which to jitter points on plot (to facilitate visualization)
-#'
+#' @param max.overlaps (numeric) Only necessary if labeling individuals. Increasing this will increase the number of individuals labeled, even if labels overlap.
+
 #' @return ggplot2 object
 #' @export
 #'
@@ -463,7 +465,7 @@ triangle.plot <- function(data = NULL, colors = NULL, outline = T, ind.labels = 
 #'
 #' @examples
 #' #missing.plot(data = your.data)
-missing.plot <- function(data = NULL, outline = T, ind.labels = F, cex = 2, alpha = 1, jitter = 0) {
+missing.plot <- function(data = NULL, outline = T, ind.labels = F, cex = 2, alpha = 1, jitter = 0, max.overlaps = 10) {
   if(outline) {
     p <- ggplot(data, aes(x=hybrid.index, y=heterozygosity, color=perc.missing)) +
       geom_segment(aes(x = 0.5, xend = 1, y = 1, yend = 0), color = "black") +
@@ -491,7 +493,7 @@ missing.plot <- function(data = NULL, outline = T, ind.labels = F, cex = 2, alph
       theme_classic()
   }
   if(ind.labels) {
-    p <- p + geom_label_repel(aes(label=id), size=2)
+    p <- p + geom_label_repel(aes(label=id), size=2, max.overlaps = max.overlaps)
   }
   return(p)
 }
