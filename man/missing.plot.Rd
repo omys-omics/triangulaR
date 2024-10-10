@@ -4,12 +4,21 @@
 \alias{missing.plot}
 \title{missing.plot}
 \usage{
-missing.plot(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 0)
+missing.plot(
+  data = NULL,
+  outline = T,
+  ind.labels = F,
+  cex = 2,
+  alpha = 1,
+  jitter = 0
+)
 }
 \arguments{
 \item{data}{Dataframe returned from hybridIndex function}
 
 \item{outline}{(logical) Whether or not to draw possible triangle space as outline}
+
+\item{ind.labels}{(logical) Whether or not to label each individual on the triangle plot}
 
 \item{cex}{(character) Size of points}
 
@@ -21,7 +30,7 @@ missing.plot(data = NULL, outline = T, cex = 2, alpha = 1, jitter = 0)
 ggplot2 object
 }
 \description{
-Color the triangle plot by perecent missing data in each sample
+Color the triangle plot by percent missing data in each sample
 }
 \examples{
 #missing.plot(data = your.data)

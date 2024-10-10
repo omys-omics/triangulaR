@@ -8,6 +8,7 @@ triangle.plot(
   data = NULL,
   colors = NULL,
   outline = T,
+  ind.labels = F,
   cex = 2,
   alpha = 1,
   jitter = 0
@@ -19,6 +20,8 @@ triangle.plot(
 \item{colors}{(character) Colors to use for each population. Optional, if not supplied, default colors will be generated}
 
 \item{outline}{(logical) Whether or not to draw possible triangle space as outline}
+
+\item{ind.labels}{(logical) Whether or not to label each individual on the triangle plot}
 
 \item{cex}{(character) Size of points}
 
