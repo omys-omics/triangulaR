@@ -11,7 +11,8 @@ triangle.plot(
   ind.labels = F,
   cex = 2,
   alpha = 1,
-  jitter = 0
+  jitter = 0,
+  max.overlaps = 10
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ triangle.plot(
 \item{alpha}{(numeric) Transparency of points}
 
 \item{jitter}{(numeric) Amount by which to jitter points on plot (to facilitate visualization)}
+
+\item{max.overlaps}{(numeric) Only necessary if labeling individuals. Increasing this will increase the number of individuals labeled, even if labels overlap.}
 }
 \value{
 ggplot2 object
