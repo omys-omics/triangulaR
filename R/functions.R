@@ -499,4 +499,320 @@ missing.plot <- function(data = NULL, outline = T, ind.labels = F, cex = 2, alph
 }
 
 
+#' read.genotypes
+#'
+#' Read in genotype data from a tab-delimited file in matrix format (e.g. structure format) and convert it to a vcfR object
+#'
+#' @param file Name of the tab-delimited file. Individuals should be in rows and alleles/genotypes should be in columns.
+#' @param data.type (character) Either "alleles" or "genotypes". Use alleles if each allele (e.g. A,C,G,T OR 1,2,3,4) is encoded separately in the file, either across rows or columns. Use genotypes if the alleles are encoded as a single genotype (e.g. 0=homozygous ref, 1=heterozygous, 2=homozygous alt). Default is alleles.
+#' @param missing.value (character) Value used for missing data. Default is "N".
+#' @param n.id.cols (numeric) Number of columns before genotypes start. Must be at least 1 with individual IDs.
+#' @param n.id.rows (numeric) Number of rows before genotypes start. Usually there is 1 with SNP IDs. If not, artificial IDs will be assigned.
+#' @param second.allele (numeric) Either "columns" or "rows". Use columns if second allele is in the next column. Use rows if second allele is in the next row. Not required if data are in genotype format.
+
+#' @return vcfR object
+#' @export
+#'
+#' @import vcfR
+#'
+#' @examples
+#' #read.genotypes(file = alleles.str, data.type = "alleles", missing.value = -9, n.id.cols = 2, n.id.rows = 1, second.allele = "rows")
+#' #read.genotypes(file = genotypes.txt, data.type = "genotypes", missing.value = "N", n.id.cols = 2, n.id.rows = 1)
+read.genotypes <- function(file = NULL, data.type = "alleles", missing.value = "N", n.id.cols = NULL, n.id.rows = NULL, second.allele = "NA") {
+  if (is.null(n.id.cols)) {
+    stop( "Please indicate how many id columns there are. There should be at least one containing individual IDs")
+  }
+  if (is.null(n.id.rows)) {
+    stop( "Please indicate how many id rows there are. There could be one containing snp IDs, but if not, indicate 0")
+  }
+  if (data.type == "alleles") {
+    if (second.allele == "NA") {
+      stop( "Please indicate whether the second allele occurs in the following column or the following row")
+    }
+  }
+
+  if (n.id.cols < 1) {
+    stop("There must be at least 1 column with individual IDs.")
+  }
+
+  # read in data
+  g <- read.table(file = file, sep ="\t", header = F, colClasses = "character")
+  g <- as.matrix(g)
+
+  # assign SNP ids
+  if (n.id.rows > 0) {
+    ID <- unique(g[1,c(-1:(n.id.cols*-1))]) # retrieve SNP ids if they are included
+  } else {
+    if (second.allele == "columns") {
+      ID <- 1:((ncol(g) - n.id.cols)/2) # assign sequentially by number of columns with genotypes, divided by 2
+    }
+    if (second.allele == "rows" || second.allele == "NA") {
+      ID <- 1:(ncol(g) - n.id.cols) # assign sequentially by number of columns with genotypes
+    }
+  }
+
+  # assign individual ids
+  if (n.id.rows > 0) {
+    inds <- unique(g[-1:(n.id.rows*-1),1])
+  } else {
+    inds <- unique(g[,1])
+  }
+
+  # remove ids from beginning rows and columns
+  if (n.id.rows > 0) {
+    g <- g[-1:(n.id.rows*-1),-1:(n.id.cols*-1)]
+  } else {
+    g <- g[,-1:(n.id.cols*-1)]
+  }
+  # set ids as column and row names
+  if (data.type == "genotypes") {
+    colnames(g) <- ID
+    rownames(g) <- inds
+    suppressWarnings(class(g) <- "numeric")
+  } else {
+    if (second.allele == "columns") {
+      ID2 <- c()
+      for (id in ID) {
+        ID2 <- c(ID2, paste(id, 1, sep = "."))
+        ID2 <- c(ID2, paste(id, 2, sep = "."))
+      }
+      colnames(g) <- ID2
+    }
+    if (second.allele == "rows") {
+      colnames(g) <- ID
+    }
+
+    if (second.allele == "columns") {
+      rownames(g) <- inds
+    }
+    if (second.allele == "rows") {
+      inds2 <- c()
+      for (ind in inds) {
+        inds2 <- c(inds2, paste(ind, 1, sep = "."))
+        inds2 <- c(inds2, paste(ind, 2, sep = "."))
+      }
+      rownames(g) <- inds2
+    }
+  }
+
+  # Pivot matrix so second allele occurs in the following column instead of in the following row
+  if (second.allele == "rows") {
+    h <- matrix(nrow = nrow(g)/2, ncol = ncol(g)*2)
+    for (a in 1:nrow(h)) {
+      b <- a*2
+      ig <- c()
+      for (d in 1:ncol(g)) {
+        ig <- c(ig, g[(b-1):b,d])
+      }
+      h[a,] <- ig
+    }
+
+    # rename rows with individual ids
+    rownames(h) <- inds
+
+    # rename columns with SNP ids
+    ID2 <- c()
+    for (id in ID) {
+      ID2 <- c(ID2, paste(id, 1, sep = "."))
+      ID2 <- c(ID2, paste(id, 2, sep = "."))
+    }
+    colnames(h) <- ID2
+    g <- h
+  }
+
+  # Build vcfR fields if data is in allele format with either letters or numbers (e.g. A,C,G,T OR 1,2,3,4)
+  if (data.type == "alleles") {
+    # setup fix dataframe
+    fix <- matrix(ncol=8, nrow=0)
+    colnames(fix) <- c("CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO")
+
+    # setup gt dataframe
+    gt <- matrix(ncol=nrow(g)+1, nrow = 0)
+    colnames(gt) <- c("FORMAT", rownames(g))
+
+    # Placeholders for each SNP's VCF metadata
+    chrom <- "NA"  # Chromosome placeholder
+    pos <- "NA"    # Position placeholder (you can modify this if you have position data)
+    qual <- "."     # Quality placeholder
+    filter <- "PASS"  # Placeholder for filter
+    info <- "."     # Placeholder for info
+    format <- "GT"  # Format for genotype
+
+    # initialize counter for multiallelic sites
+    multiallelic.sites <- 0
+
+    for (snp_idx in 1:(ncol(g)/2)) {
+      # SNP id for metadata
+      snp_id <- sapply(strsplit(colnames(g)[2*snp_idx], "\\."), '[', 1)  # Unique SNP ID
+
+      # Extract alleles for the current SNP across all samples (alleles are in columns 2*snp_idx-1 and 2*snp_idx)
+      allele1 <- as.character(g[, (2 * snp_idx - 1)])  # Allele 1
+      allele2 <- as.character(g[, (2 * snp_idx)])      # Allele 2
+
+      # Combine the two allele columns for all samples and exclude "N"
+      alleles <- c(allele1, allele2)
+      alleles <- alleles[alleles != missing.value]  # Remove "N" (missing data)
+
+      # Count allele frequencies
+      allele_freq <- table(alleles)
+
+      # Assign REF and ALT based on the frequency of alleles
+      if (length(allele_freq) > 1) {
+        if (length(allele_freq) == 2 && allele_freq[1] == allele_freq[2]) {
+          # If frequencies are the same, randomly choose REF and ALT
+          ref <- sample(names(allele_freq), 1)
+          alt <- setdiff(names(allele_freq), ref)
+        } else {
+          # Otherwise, pick most frequent as REF and least frequent as ALT
+          ref <- names(allele_freq)[which.max(allele_freq)]  # Most frequent allele
+          alt <- names(allele_freq)[which.min(allele_freq)]  # Least frequent allele
+        }
+      } else {
+        # If there's only one unique allele (monomorphic site)
+        ref <- names(allele_freq)
+        alt <- "N"  # No alternative allele for monomorphic sites
+      }
+
+      # Extract genotypes for each sample for this SNP
+      genotypes <- sapply(1:nrow(g), function(i) {
+        allele1 <- as.character(g[i, (2 * snp_idx - 1)])  # First allele
+        allele2 <- as.character(g[i, (2 * snp_idx)])      # Second allele
+
+        # Check for missing data or "N" alleles
+        if (is.na(allele1) || is.na(allele2) || allele1 == missing.value || allele2 == missing.value) {
+          NA  # Missing data format
+        } else {
+          # Convert genotypes to 0/1, 1/1, etc. based on REF/ALT
+          if (allele1 == ref && allele2 == ref) {
+            "0/0"
+          } else if (allele1 == ref && allele2 == alt) {
+            "0/1"
+          } else if (allele1 == alt && allele2 == ref) {
+            "1/0"
+          } else if (allele1 == alt && allele2 == alt) {
+            "1/1"
+          } else {
+            "XX"  # If there is any other combination
+          }
+        }
+      })
+
+      # Check that there are no "XX" which would indicate a multiallelic site
+      if (!any(genotypes=="XX", na.rm = T)) {
+
+        # Combine VCF fields into a row for the "fix" matrix
+        fix_row <- c(chrom, pos, snp_id, ref, alt, qual, filter, info)
+        fix <- rbind(fix, fix_row)
+
+        # Add FORMAT and genotypes for each individual to "gt" matrix
+        gt_row <- c(format, genotypes)
+        gt <- rbind(gt, gt_row)
+
+      } else {
+        multiallelic.sites <- multiallelic.sites + 1
+      }
+    }
+
+    if (multiallelic.sites > 0) {
+      print(paste0(multiallelic.sites, " multiallelic sites were removed from the dataset"))
+    }
+
+    # rename rows
+    rownames(fix) <- 1:nrow(fix)
+    rownames(gt) <- 1:nrow(gt)
+  }
+
+  # Build vcfR fields if data is in number genotype format (e.g. 0,1,2, where 0 and 2 are homozygous states and 1 is heterozygous)
+  if (data.type == "genotypes") {
+    # setup fix dataframe
+    fix <- matrix(ncol=8, nrow=0)
+    colnames(fix) <- c("CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO")
+
+    # setup gt dataframe
+    gt <- matrix(ncol=nrow(g)+1, nrow = 0)
+    colnames(gt) <- c("FORMAT", rownames(g))
+
+    # transpose the genotype matrix
+    g <- t(g)
+
+    # Placeholders for each SNP's VCF metadata
+    chrom <- "NA"  # Chromosome placeholder
+    pos <- "NA"    # Position placeholder (you can modify this if you have position data)
+    ref <- "A"     # Assign arbitrary nucleotide as reference
+    alt <- "T"     # Assign arbitrary nucleotide as alternate
+    qual <- "."     # Quality placeholder
+    filter <- "PASS"  # Placeholder for filter
+    info <- "."     # Placeholder for info
+    format <- "GT"  # Format for genotype
+
+    # initialize counter for multiallelic sites
+    multiallelic.sites <- 0
+
+    for (snp_idx in 1:nrow(g)) {
+      # SNP id for metadata
+      snp_id <- rownames(g)[snp_idx]  # Unique SNP ID
+
+      # Extract genotypes for each sample for this SNP
+      genotypes <- sapply(1:ncol(g), function(i) {
+        genotype <- as.character(g[snp_idx,i])
+        # Check for missing data or "N" alleles
+        if (is.na(genotype) || genotype == missing.value) {
+          NA  # Missing data format
+        } else {
+          # Convert genotypes to 0/1, 1/1, etc. based on REF/ALT
+          if (genotype == 0) {
+            "0/0"
+          } else if (genotype == 1) {
+            "0/1"
+          } else if (genotype == 2) {
+            "1/1"
+          } else {
+            "XX"  # If there is any other combination
+          }
+        }
+      })
+
+      # Check that there are no "XX" which would indicate a multiallelic site
+      if (!any(genotypes=="XX", na.rm = T)) {
+        # Combine VCF fields into a row for the "fix" matrix
+        fix_row <- c(chrom, pos, snp_id, ref, alt, qual, filter, info)
+        fix <- rbind(fix, fix_row)
+
+        # Add FORMAT and genotypes for each individual to "gt" matrix
+        gt_row <- c(format, genotypes)
+        gt <- rbind(gt, gt_row)
+
+      } else {
+        multiallelic.sites <- multiallelic.sites + 1
+      }
+    }
+
+    if (multiallelic.sites > 0) {
+      print(paste0(multiallelic.sites, " multiallelic sites were removed from the dataset"))
+    }
+
+    # rename rows
+    rownames(fix) <- 1:nrow(fix)
+    rownames(gt) <- 1:nrow(gt)
+  }
+
+  # make empty vcfR object
+  v <- new("vcfR")
+
+  # populate "meta" field
+  v@meta <- c("##fileformat=VCFv4.2",
+              "##source=triangulaR",
+              "##INFO=<ID=.,Number=.,Type=.,Description=\"Placeholder for extra information\">",
+              "##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">")
+
+  # populate "fix" field
+  v@fix <- fix
+
+  # population "gt" field
+  v@gt <- gt
+
+  return(v)
+}
+
+
 
