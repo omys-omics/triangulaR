@@ -4,7 +4,6 @@
 # triangulaR <img src="man/figures/hex_logo.png" align="right" alt="" width="180" />
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 *triangulaR* is a package for identifying ancestry-informative markers
@@ -26,9 +25,10 @@ devtools::install_github("omys-omics/triangulaR")
 
 ## Citation
 
-If you publish any work that uses *triangulaR*, please consider citing
-the following paper (currently available as a preprint):
-<https://www.biorxiv.org/content/10.1101/2024.03.28.587167v1>
+If you publish any work that uses *triangulaR*, please cite the
+following paper:
+
+<https://www.nature.com/articles/s41437-025-00760-2>
 
 ## How to use this package:
 
@@ -46,8 +46,7 @@ step, see [SNPfiltR](https://github.com/DevonDeRaad/SNPfiltR).
 ``` r
 library(triangulaR)
 #> Loading required package: ggplot2
-#> Warning: package 'ggplot2' was built under R version 4.0.5
-#> This is triangulaR v.0.0.0.9000
+#> This is triangulaR v.0.0.1
 #> 
 #>           /\
 #>          /  \
@@ -56,7 +55,9 @@ library(triangulaR)
 #> 
 #> Usage information is available at: https://github.com/omys-omics/triangulaR/ 
 #> 
-#> Please cite the following if you use triangulaR in a publication:
+#> Please cite the following if you use triangulaR in a publication: 
+#> 
+#> Wiens, B. J., & Colella, J. P. (2024). triangulaR: an R package for identifying AIMs and building triangle plots using SNP data from hybrid zones. bioRxiv, 2024-03.
 library(vcfR)
 #> 
 #>    *****       ***   vcfR   ***       *****
@@ -154,6 +155,15 @@ hi.het <- hybridIndex(vcfR = example.vcfR.diff, pm = example.popmap, p1 = "P1", 
 cols <- c("#af8dc3", "#7fbf7b", "#bababa", "#878787", "#762a83", "#1b7837")
 # View triangle plot
 triangle.plot(hi.het, colors = cols)
+#> Warning in geom_segment(aes(x = 0.5, xend = 1, y = 1, yend = 0), color = "black"): All aesthetics have length 1, but the data has 120 rows.
+#> i Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
+#> Warning in geom_segment(aes(x = 0, xend = 0.5, y = 0, yend = 1), color = "black"): All aesthetics have length 1, but the data has 120 rows.
+#> i Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
+#> Warning in geom_segment(aes(x = 0, xend = 1, y = 0, yend = 0), color = "black"): All aesthetics have length 1, but the data has 120 rows.
+#> i Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
@@ -167,6 +177,15 @@ samples colored by percent missing data to investigate its effect.
 ``` r
 # There is no missing data in this dataset, so all samples have the same color
 missing.plot(hi.het)
+#> Warning in geom_segment(aes(x = 0.5, xend = 1, y = 1, yend = 0), color = "black"): All aesthetics have length 1, but the data has 120 rows.
+#> i Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
+#> Warning in geom_segment(aes(x = 0, xend = 0.5, y = 0, yend = 1), color = "black"): All aesthetics have length 1, but the data has 120 rows.
+#> i Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
+#> Warning in geom_segment(aes(x = 0, xend = 1, y = 0, yend = 0), color = "black"): All aesthetics have length 1, but the data has 120 rows.
+#> i Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
