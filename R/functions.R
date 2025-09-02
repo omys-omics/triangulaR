@@ -25,6 +25,14 @@ alleleFreqDiff <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL, differe
     stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
   }
 
+  if (!(p1 %in% pm$pop)) {
+    stop("p1 is not listed as a population in your popmap")
+  }
+
+  if (!(p2 %in% pm$pop)) {
+    stop("p2 is not listed as a population in your popmap")
+  }
+
   # Extract genotypes
   m <- extract.gt(vcfR)
 
@@ -100,6 +108,14 @@ hybridIndex <- function(vcfR = NULL, pm = NULL, p1 = NULL, p2 = NULL) {
 
   if (!(identical(sort(unique(colnames(vcfR@gt)[-1])), sort(unique(pm$id))))) {
     stop("There is at least one individual in the vcfR object that is not in the popmap, or vice versa")
+  }
+
+  if (!(p1 %in% pm$pop)) {
+    stop("p1 is not listed as a population in your popmap")
+  }
+
+  if (!(p2 %in% pm$pop)) {
+    stop("p2 is not listed as a population in your popmap")
   }
 
   # get number of differences above threshold
